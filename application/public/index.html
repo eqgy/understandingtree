@@ -1,0 +1,981 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Understanding Tree</title>
+<link href="assets/style/font-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="assets/style/jquery-ui.css" rel="stylesheet">
+<link href="assets/style/style.css" rel="stylesheet" type="text/css"/>
+<link href="assets/style/d3/d3-context-menu.css" rel="stylesheet">
+<!--SATISH TEMP <a href="http://www.goodreads.com/book/show/9246711-the-twelfth-imam" target="_blank"> -->
+<link rel="stylesheet" href="dist/themes/default/style.min.css" />
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" /> -->
+<link rel="stylesheet" href="assets/style/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+
+	
+.node circle { fill: #fff; stroke: steelblue;  stroke-width: 3px;}
+.node text { font: 12px sans-serif; }
+.link { fill: none;  stroke: #ccc;  stroke-width: 2px;}
+
+.axis line {
+  fill: none;
+  stroke: #ddd;
+  shape-rendering: crispEdges;
+  vector-effect: non-scaling-stroke;
+}
+
+.jstree a .jstree-icon { display:none !important; }
+	
+    </style>
+	
+</head>
+<body>
+
+<div class="main">	
+	<div class="header">
+		<div class="cell-4 columns">
+			<a href="index.html" class="logo">
+				<!--<img src="assets/images/logo.png"/>-->
+				<h1>Understanding Tree</h1>
+				<span>Information to Knowledge</span>
+			</a>			
+		</div>
+		<div class="cell-8 columns"> 
+			<span class="icon-btn bookmark" title="Bookmark"><i class="fa fa-star"></i></span>
+			<div class="filter-cont">
+				<span class="icon-btn btn-filter" title="Filter"><i class="fa fa-filter"></i></span>
+				<ul class="filter-options">
+					<li>Filter 01</li>
+					<li>Filter 02</li>
+					<li>Filter 03</li>
+				</ul>
+			</div>
+			<div class="filter-cont">
+				<span class="icon-btn btn-filter" id="addScales" title="Filter"><i class="fa fa-gear"></i></span>			
+			</div>			
+			<div class="search-cont">
+				<input type="text" id="searchTree" />
+				<span class="search-button"><i class="fa fa-search"></i></span>
+			</div>			
+		</div>
+	</div>
+	<div class="wrapper">
+		<div class="content MySplitter">
+			<div class="left-cell">
+				<div class="t-tabs-area">
+					<ul class="t-tabs">
+						<li class="active" rel="ltab1">My Account</li>
+						<li rel="ltab2">Org. Chart</li>
+					</ul>
+					<div class="t-tabs-cont">
+						<!-- Left Tabs 01 -->
+						<div id="ltab1" class="tab-cont active" style="display:block;">
+							<div class="user-pic">
+								<div class="user-img">
+									<!--<i class="fa fa-user"></i>-->
+									<img src="assets/images/img01.jpg"/>
+								</div>
+								<h3>Jane Doe</h3>
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td class="text-left">Title</td>
+										<td class="text-center">:</td>
+										<td class="text-left">National Sales</td>
+									</tr>
+									<tr>
+										<td class="text-left">Direct No</td>
+										<td class="text-center">:</td>
+										<!-- <td class="text-left">610-299-8007</td> -->
+										<td class="text-left">646-600-TREE</td>
+									</tr>
+									<tr>
+										<td class="text-left">Email</td>
+										<td class="text-center">:</td>
+										<!--<td class="text-left">Le@Hugecompany.com</td>-->
+                                        <td class="text-left">Sales@Transvergent.com</td>
+									</tr>
+									<tr>
+										<td class="text-left"></td>
+										<td class="text-center"></td>
+										<td class="text-right"><label class="link">Resume Link</label></td>
+									</tr>
+								</table>
+								
+							</div>
+							<div class="nav-links">
+								<ul class="vmenu">
+									<li>
+										<i class="fa fa-puzzle-piece"></i><span>Solutions</span>
+                                        <ul>
+                                        	<li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                        </ul>
+									</li>
+									<li>
+										<i class="fa fa-bug"></i><span>Problems</span>
+                                        <ul>
+                                        	<li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                            <li><span>Text Here</span></li>
+                                        </ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- Left Tabs 01 -->
+						<!-- Left Tabs 02 -->
+						<div id="ltab2" class="tab-cont">
+							Org. Chart here...
+						</div>
+						<!-- Left Tabs 02 -->
+					</div>
+				</div>				
+            </div>
+			
+			<div class="RightCell"> 
+				
+				<div class="middle-cell">
+					<div class="t-tabs-area">
+						<ul class="t-tabs">
+							<li  rel="mtab1">Understanding Tree</li>
+							<li class="active" rel="mtab2">Understanding Universe</li>
+						</ul>
+						<div class="t-tabs-cont">
+							<!-- Middle Tab 01 -->
+							<div id="mtab1" class="tab-cont">
+								<div class="und-tree">
+									<!--<h1>Topic: How do I get a mouse out of my house?</h1>-->
+                                    <h1>Topic: <span id="spnTopic"></span></h1>
+								</div>
+							</div>
+							<!-- Middle Tab 01 -->
+							<!-- Middle Tab 02 -->
+							<div id="mtab2" class="tab-cont active" style="display:block;">
+                            	<div class="table-cont">
+                                	<!--<div class="search-cont">
+                                    	<input type="text" placeholder="Search"/>
+                                        <span class="search-button"><i class="fa fa-search"></i></span>
+                                    </div>-->
+                                	<span class="button" id="displayAddTopicPopup">Add Topic</span>
+                                    <table id="topicsTbl" class="t-table"  cellpadding="0" cellspacing="0">
+                                         <thead>
+                                            <tr>
+                                                <th>Initial Question</th>
+                                                <th>Category</th>
+                                                <th>Posted Date</th>
+				                                <th>Posted By</th>
+				                                <th>Open Tree</th>
+				                                <th>Delete</th>
+                                            </tr>
+                                         </thead>
+                                    </table>
+                                  
+
+                                </div>
+							</div>
+							<!-- Middle Tab 02 -->
+						</div>
+					</div>					
+				</div>
+				
+				<div class="right-cell">
+					<div class="t-tabs-area">
+						<!--SATISH: Obsolete <div class="group-buttons action-icons1">
+							<span class="icon-btn" title="Add Details"><span class="icon-img add-deta"></span></span>
+							<span class="icon-btn" title="Add Counter Argument"><span class="icon-img add-counter"></span></span>
+							<span class="icon-btn" title="Add Subcategory"><span class="icon-img add-subca"></span></span>
+							<span class="icon-btn" title="Add Divergent Node"><span class="icon-img add-diver"></span></span>
+						</div>-->
+						<ul class="t-tabs">
+							<li class="active" rel="tab1">Details</li>
+							<li rel="tab2">Outline</li>
+						</ul>
+						<div class="t-tabs-cont">
+							<!-- Tab 01 -->
+							<div id="tab1" class="tab-cont active" style="display:block;">
+								<div class="detail-content"; style="overflow:auto;overflow-x:hidden;overflow-y:auto;padding-bottom:0px !important"> <!-- id="ulDetails"> -->
+									<!-- <div style="height:370px; overflow:auto;overflow-x:hidden;overflow-y:auto; ">
+									<ul class="details-cells" id="ulDetails"> -->
+                                        	<!--<li ng-repeat="detail in nodeDetails">
+                                              <!--{{country.name}} has population of {{country.population}}-->
+                                              <!--  {{detail.text}}
+                                            </li>-->
+									<!-- </ul>
+									</div> -->
+
+<!--									<div style="height:490px; overflow:auto"><!--style="max-height:490px; overflow:auto"
+									<ul class="details-cells scrollbox" id="ulDetails">
+                                        	<!--<li ng-repeat="detail in nodeDetails">
+                                              <!--{{country.name}} has population of {{country.population}}-->
+                                              <!--  {{detail.text}}
+                                            </li>
+									</ul>
+									</div>
+-->									
+									<div class="add-data">
+										<textarea placeholder="Text here ..." id="txtDetails"></textarea>
+										<!-- <span class="btn-drop-down">
+											<span class="drop-down-button">Upload <i class="fa fa-caret-down"></i></span>
+											<ul class="options-list">
+												<li>Image</li>
+												<li>Document</li>
+											</ul>
+										</span> -->
+                                        <!--div added by kc-->
+                                        <div class="detailsBtn-align">
+									        <!--<span class="button small" id="btnCnclDetails">Cancel</span>-->
+									        <button type="button" class="button small" id="svDetails" disabled="disabled">Save</button>
+                                            <button type="button" class="button small hide" id="updateDetail" disabled="disabled">Save</button>
+                                        </div>
+									</div>
+								</div>
+							</div>
+							<!-- Tab 01 -->
+							<!-- Tab 02 -->
+							<div id="tab2"   class="tab-cont">
+                          <!--style="min-height:650px; max-height:650px; overflow:auto"-->
+								<!--<div class="tree-div" style="height:520px;overflow:scroll;overflow-x:hidden;overflow-y:scroll;">		-->							
+                                    <!--<json-tree object="someobj"></json-tree>-->
+									<div id="jstree" style="height:520px;overflow:auto;overflow-x:hidden;overflow-y:auto">
+                                 
+                                      </div>
+								</div>
+							<!--</div>-->
+							<!-- Tab 02 -->
+							
+						</div>
+					</div>
+                	
+                </div>	 
+			</div>
+		</div>
+	</div>
+
+<!-- POPUPS -->
+<div class="popup">
+	<div class="popup-cont-area">
+		<div class="popup-cont">
+			<span class="close"><i class="fa fa-close"></i></span>
+			<div class="PHeader">
+				<h1>Upload</h1>
+			</div>
+			<div class="cell-12 columns">				
+				<div class="cell-12 columns">
+					<div class="form-group">
+						<label>Title</label>
+						<div class="input-area">
+							<input type="text" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Path</label>
+						<div class="input-area upload-cont">
+							<input type="text" placeholder="Choose file ..." />
+							<span><i class="fa fa-upload"></i></span>
+						</div>
+					</div>
+				</div>
+				<div class="PActions">
+					<div class="PActions-cont">
+						<span class="button">Save</span>
+						<span class="button">Cancel</span>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+<!-- POPUPS -->
+
+<!-- ADD POST POPUP - START -->
+<div class="hover-popup" id="save-node-popup">
+	<div class="PHeader">
+		<h1>New Post</h1>		
+	</div>
+	<div class="cell-12 columns">
+		<div class="pop-body">
+			<div class="form-group">
+				<input type="text" id="txtTitle" placeholder="Title here ..."/>
+			</div>           
+			<div class="form-group">
+				<textarea placeholder="Message text here ..." id="txtAbstract"></textarea>
+			</div>
+		</div>
+		<div class="PActions">							
+			<span class="button" id="saveNode">Save</span>
+			<span class="button" id="cancel">Cancel</span>			
+		</div>				
+	</div>
+</div>		
+<!-- ADD POST POPUP - END-->
+
+<!-- ADD TOPIC POPUP - START -->
+<div class="hover-popup" id="save-topic-popup">
+	<div class="PHeader">
+		<h1>New Topic</h1>		
+	</div>
+	<div class="cell-12 columns">
+         <form  id="saveTopic">
+		<div class="pop-body">           
+			<div class="form-group">
+				<input type="text" id="txtTopicTitle" required placeholder="Title here.."/>
+			</div>
+             <div class="form-group">
+				<input type="password" id="txtPwd" placeholder="Password"/>
+			</div>
+			<div class="form-group">
+				<textarea placeholder="Category here.." id="txtTopicCategory"></textarea>
+			</div>
+		</div>
+		<div class="PActions">							
+			<!--<span class="button" id="saveTopic">Save</span>-->
+            <input class="button" type="submit" value="Save">
+			<span class="button" id="cancelTopic">Cancel</span>			
+		</div>	
+             </form>			
+	</div>
+</div>		
+<!-- ADD TOPIC POPUP - END-->
+
+<!-- VOTING POPUPS - START -->
+<!-- VOTING POPUP for Solution -->
+<div class="hover-popup voting" style="display:block;" id="votingSolutionPopup">
+	<div class="PHeader">
+		<h1>Voting</h1>		
+	</div>
+	<div class="cell-12 columns">
+		<div class="pop-body">
+        	<div class="range-sliders left-range">
+            	<h5 class="title"><strong>Effectiveness</strong></h5>		            	
+				<div class="slider" id="slidereff"></div>
+				<div class="slider-points effectiveness"></div>
+            </div>
+           
+        	<div class="range-sliders">
+            	<h5 class="title"><strong>Feasibility</strong></h5>	            	
+				<div class="slider" id="slidefeas"></div>	
+				<div class="slider-points feasibility"></div>		
+            </div>
+		</div> 
+		<div class="PActions">							
+			<span class="button" id ="votesubmit">Submit</span>
+			<span class="button" id="votecancel">Cancel</span>			
+		</div>				
+	</div>
+</div>		
+
+<!-- VOTING POPUP for Problem -->
+<div class="hover-popup voting" style="display:block;" id="votingProblemPopup">
+	<div class="PHeader1">
+		<h1>Voting</h1>		
+	</div>
+	<div class="cell-12 columns">
+		<div class="pop-body">
+        	<div class="range-sliders1 left-range">
+            	<h5 class="title"><strong>Severity</strong></h5>		            	
+				<div class="slider" id="sliderseverity"></div>
+				<div class="slider-points serverity"></div>
+            </div>
+           
+        	<div class="range-sliders1">
+            	<h5 class="title"><strong>Plausibility</strong></h5>	            	
+				<div class="slider" id="sliderplaus"></div>	
+				<div class="slider-points plausibility"></div>		
+            </div>
+		</div> 
+		<div class="PActions">							
+			<span class="button" id ="votesubmitprob">Submit</span>
+			<span class="button" id="votecancelprob">Cancel</span>			
+		</div>				
+	</div>
+</div>		
+<!-- VOTIN POPUPS - END-->
+
+    <!--Global Scales-->
+    <div class="hover-popup scales" id="scalesPopup" style="display:none;">
+        <div class="t-tabs-area">
+						<ul class="t-tabs">
+							<li class="active" rel="stab">Solution</li>
+							<li  rel="ptab">problem</li>
+						</ul>
+						<div class="t-tabs-cont">
+							<!-- Middle Tab 01 -->
+							<div id="stab" class="tab-cont" style="display:block">
+							<div class="table-cont">
+                                   <div class="cell-6 columns">
+                                       <div>
+		                                <h3>Effectiveness</h3>		
+	                                   </div> 
+                                       <div>
+                                            <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td><input type="text" id="txt10Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td><input type="text" id="txt9Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td><input type="text" id="txt8Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td><input type="text" id="txt7Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td><input type="text" id="txt6Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><input type="text" id="txt5Effectiveness"/></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                         <td>4</td>
+                                         <td><input type="text" id="txt4Effectiveness"/></td>
+                                        </tr>
+                                        <tr>
+                                         <td>3</td>
+                                         <td><input type="text" id="txt3Effectiveness"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>2</td>
+                                         <td><input type="text" id="txt2Effectiveness"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>1</td>
+                                         <td><input type="text" id="txt1Effectiveness"/></td>
+                                        </tr>
+                                    </table>
+                                       </div>
+                                   </div>                             	
+                                   <div class="cell-3 columns">
+                                         <div >
+		                                <h3>Standard Scale</h3>
+                                        <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>size</th>
+                                        </tr>
+                                        <tr>
+                                           <td>
+                                               <input type="number" max="100" min="10" id="txt10SS"/>
+                                               <small>(max val 100)</small>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                           <td>
+                                               <input type="number" max="100" min="10" id="txt9SS"/>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                           <td>
+                                               <input type="number" max="100" min="10" id="txt8SS"/>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                           <td>
+                                               <input type="number" max="100" min="10" id="txt7SS"/>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                           <td>
+                                               <input type="number" max="100" min="10" id="txt6SS"/>
+                                           </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="number" max="100" min="10" id="txt5SS" />
+                                                 
+                                        </tr>
+                                        <tr>
+                                       <td>
+                                           <input type="number" max="100" min="10" id="txt4SS"/>
+                                       </td>
+                                        </tr>
+                                        <tr>
+                                        <td><input type="number" max="100" min="10" id="txt3SS"/></td>
+                                        </tr>
+                                             <tr>
+                                            <td><input type="number" max="100" min="10" id="txt2SS"/></td>                                                                                      
+                                        </tr>
+                                             <tr>
+                                            <td><input type="number" max="100" min="10" id="txt1SS"/>
+                                                 <small>(min val 10)</small>
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                    </table>
+	                                </div>
+                                      
+                                   </div>
+                                <div class="cell-3 columns">                                        
+		                                <h3>Dampening Scale</h3>
+                                     <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>size</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt10SD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt9SD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt8SD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt7SD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt6SD"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" max="100" min="10"  id="txt5SD"/>
+                                               
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                       <td><input type="number" max="100" min="10" id="txt4SD"/></td>
+                                        </tr>
+                                        <tr>
+                                        <td><input type="number" max="100" min="10" id="txt3SD"/></td>
+                                        </tr>
+                                             <tr>
+                                            <td><input type="number" max="100" min="10" id="txt2SD"/></td>                                            
+                                            
+                                        </tr>
+                                             <tr>
+                                            <td><input type="number" max="100" min="10" id="txt1SD" />
+                                                 
+                                            </td>
+                                            
+                                            
+                                        </tr>
+                                    </table>	
+                                   </div>
+                                  <div class="cell-6" style="padding:300px 0px 20px 10px;">
+                                       <div>
+		                                <h3>Feasibility</h3>		
+	                                   </div> 
+                                       <div>
+                                             <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Description</th>
+                                          
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td><input type="text" id="txt10Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td><input type="text" id="txt9Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td><input type="text" id="txt8Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td><input type="text" id="txt7Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td><input type="text" id="txt6Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><input type="text" id="txt5Feasibility"/></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                         <td>4</td>
+                                         <td><input type="text" id="txt4Feasibility"/></td>
+                                        </tr>
+                                        <tr>
+                                         <td>3</td>
+                                         <td><input type="text" id="txt3Feasibility"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>2</td>
+                                         <td><input type="text" id="txt2Feasibility"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>1</td>
+                                         <td><input type="text" id="txt1Feasibility"/></td>
+                                        </tr>
+                                    </table>
+                                       </div>
+                                   </div>       
+                                                                	
+
+                                </div>
+                            <div class="PActions">							
+			                    <span class="button" id="saveSolution">Save</span>
+			                    <span class="button" id="solutionCancel">Cancel</span>			
+		                    </div>	
+							</div>
+							<!-- Middle Tab 01 -->
+							<!-- Middle Tab 02 -->
+							<div id="ptab" class="tab-cont" >
+                                <div class="table-cont">
+                                   <div class="cell-6 columns">
+                                       <div>
+		                                <h3>SEVERITY</h3>		
+	                                   </div> 
+                                       <div>
+                                            <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Description</th>
+                                          
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td><input type="text" id="txt10Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td><input type="text" id="txt9Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td><input type="text" id="txt8Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td><input type="text" id="txt7Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td><input type="text" id="txt6Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><input type="text" id="txt5Severity"/></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                         <td>4</td>
+                                         <td><input type="text" id="txt4Severity"/></td>
+                                        </tr>
+                                        <tr>
+                                         <td>3</td>
+                                         <td><input type="text" id="txt3Severity"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>2</td>
+                                         <td><input type="text" id="txt2Severity"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>1</td>
+                                         <td><input type="text" id="txt1Severity"/></td>
+                                        </tr>
+                                    </table>
+                                       </div>
+                                   </div>                             	
+                               
+                                  <div class="cell-6" style="padding:300px 0px 20px 10px;">
+                                       <div>
+		                                <h3>Plausibility</h3>		
+	                                   </div> 
+                                       <div>
+                                             <table class="t-table" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Description</th>
+                                          
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td><input type="text" id="txt10Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td><input type="text" id="txt9Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td><input type="text" id="txt8Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td><input type="text" id="txt7Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td><input type="text" id="txt6Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><input type="text" id="txt5Plausibility"/></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                         <td>4</td>
+                                         <td><input type="text" id="txt4Plausibility"/></td>
+                                        </tr>
+                                        <tr>
+                                         <td>3</td>
+                                         <td><input type="text" id="txt3Plausibility"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>2</td>
+                                         <td><input type="text" id="txt2Plausibility"/></td>
+                                        </tr>
+                                                  <tr>
+                                         <td>1</td>
+                                         <td><input type="text" id="txt1Plausibility"/></td>
+                                        </tr>
+                                    </table>
+                                       </div>
+                                   </div>       
+                                                                	
+
+                                </div>
+                                 <div class="PActions">							
+			                    <span class="button" id="saveProblem">Save</span>
+			                    <span class="button" id="problemCancel">Cancel</span>			
+		                    </div>	
+							</div>
+							<!-- Middle Tab 02 -->
+						</div>
+					</div>
+
+
+</div>
+    <!--Global Scales End-->
+
+    <!-- password modal -->
+  <div class="modal fade" id="pwdModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Password</h4>
+        </div>
+        <div class="modal-body">
+           <div class="input-group">
+             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+             <input id="password" type="password" class="form-control" name="password" placeholder="Password">             
+           </div>
+            <span class="psdValid hide" style="color:red;font-size:12px">Incorrect Password</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submitPwd">Submit</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<script src="assets/js/d3.js"></script>
+<script src="assets/js/d3-context-menu.js"></script>
+
+
+<script src="dist/libs/jquery.js"></script>
+<script src="assets/js/jquery-1.4.4.min.js"></script>
+
+<script type="text/javascript">
+    var $j1_4_4=jQuery.noConflict(true);
+</script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/splitter-1.51.js"></script>
+<!--<script src="assets/js/jquery.treefilter.js"></script>-->
+<script src="assets/js/json2.js"></script>
+<script src="dist/jstree.min.js"></script>
+<script src="dist/jquery.dataTables.min.js"></script>
+<script src="dist/ckeditor/ckeditor.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="dist/index.js"></script>
+<!--<script src="build/angular-json-tree.js"></script>-->
+  
+  
+<!--<script src="assets/js/d3.v3.js"></script>-->
+<script>
+
+    var gVoteQual = 0;
+    var gVoteQuan = 0;
+    var gSelectedNode;
+
+   
+$().ready(function(){
+    $j1_4_4(".MySplitter").splitter({
+		type: "v",
+		outline: true,
+		minLeft: 150, sizeLeft: 250, maxLeft: 250,
+		anchorToWindow: true,
+		accessKey: "L"
+   });
+    $j1_4_4(".RightCell").splitter({
+		type: "v",
+		outline: true,
+		minRight: 150, sizeRight: 300, maxRight: 500,
+		accessKey: "R"
+    });
+
+    CKEDITOR.replace('txtDetails');
+ });
+// Tree
+//$(function() {
+//	var tree = new treefilter($("#my-tree"), {
+//		searcher : $("input#my-search"),
+//		multiselect : false
+//	});
+//});
+
+$(document).ready(function(){
+	$('.btn-filter').click(function(){
+		$(this).parent().find('.filter-options').show();
+	});
+	$('.filter-options li').click(function(){
+		$('.filter-options li').removeClass('active');
+		$(this).addClass('active');
+		$(this).parent().hide();
+	});
+
+	//Button////
+	$("#btnSubmit").click(function() {
+   $('.popup1').hide();
+   jQuery('#textArea').focus();
+});
+	///Button////
+
+	
+	// Tabs	//
+	$('.t-tabs li').click(function () {
+		var tabid = $(this).attr("rel");
+        $(this).parents('.t-tabs-area').find('.active').removeClass('active');
+		$(this).parents('.t-tabs-area').find('.tab-cont').hide();
+        $('#' + tabid).show();
+        $(this).addClass('active');
+        return false;
+    });	
+	//V Menu//
+	$(".nav-links ul li > span").click(function(){
+		$('.nav-links').find('.active').removeClass();
+		//slide up all the link lists
+		$(".nav-links ul ul").slideUp();
+		$(this).parent().toggleClass('active');
+		//slide down the link list below the h3 clicked - only if its closed
+		if(!$(this).next().is(":visible"))
+		{
+			$(this).next().slideDown();
+		}
+	})
+	
+	
+	$('.options-list li').click(function(e){
+		$('.popup').show();
+	});
+	$('.close').click(function(){
+		$('.popup').hide();
+	});
+	$('#cancel').click(function () {
+	    $('#save-node-popup').hide();
+	});
+	$('html').click(function() {
+		$('.options-list').hide();
+	 });
+
+	 $('.btn-drop-down').click(function(e){
+		 e.stopPropagation();
+	 });;
+
+	 $('.drop-down-button').click(function(e) {
+		 $('.options-list').toggle();
+	 });
+
+	 // Range Slider
+    // CR7: part1 - START	 
+	// var items = ['Genius [Transformational]','Smart / Novel [Progressive]', 'Standard [Status Quo]', 'Potential Neg. Effect','Negative Effect [Unethical]'];
+	// var items2 = ['Doable Today', 'Doable w/ Assistance', 'Plausible', 'Science Fiction', 'Impossible'];
+    //// CR7: part1 - END
+	// var s = $(".slider");
+	
+	// s.slider({
+	//     value: 1,
+	//     min:1,
+	//     max:items.length,
+	//     orientation:"vertical"
+	// });
+	
+	// var oneBig = 100 / (items.length -1 );
+	
+	// $.each(items, function(key,value){
+	//     var w = oneBig;
+	//     if(key === 0 || key === items.length -1 )
+	//         w = oneBig/2;	
+	//     $(".effectiveness").append("<label style='height: "+w+"%'><span>"+value+"</span></laben>");	
+	// });
+	
+	// $.each(items2, function(key,value){
+	//     var w = oneBig;
+	//     if(key === 0 || key === items.length -1 )
+	//         w = oneBig/2;	
+	//     $(".feasibility").append("<label style='height: "+w+"%'><span>"+value+"</span></laben>");		
+	// });
+
+	
+    //// Range Slider Problems Start//
+    //// CR7: part2 - START
+	// var items3 = ['Immense Problem [Fatal]', 'Huge Problem [Illegal]', 'Bad [Harmful to Reputation]', 'Unfair', 'No Problem'];
+	// var items4 = ['100% Chance', 'High Likelihood', '50% Chance', 'Unlikely', '0% Chance'];
+    //// CR7: part2 - END
+	// var s = $(".slider1");
+	
+	// s.slider({
+	//     value: 1,
+	//     min:1,
+	//     max:items3.length,
+	//     orientation:"vertical"
+	// });
+
+	// var oneBig = 100 / (items3.length -1 );
+	
+	// $.each(items3, function(key,value){
+	//     var w = oneBig;
+	//     if(key === 0 || key === items3.length -1 )
+	//         w = oneBig/2;	
+	//     $(".serverity").append("<label style='height: "+w+"%'><span>"+value+"</span></laben>");	
+	// });
+	// $.each(items4, function(key,value){
+	//     var w = oneBig;
+	//     if(key === 0 || key === items3.length -1 )
+	//         w = oneBig/2;	
+	//     $(".plausibility").append("<label style='height: "+w+"%'><span>"+value+"</span></laben>");		
+	// });
+
+    //// Range Slider End ///
+});
+$(function(){    
+    $('.detail-content').css({'height': ($(window).height()) - 100});
+    $('.tree-div').css({'height': ($(window).height()) - 122});
+    $(window).resize(function(){        
+        $('.detail-content').css({'height': ($(window).height()) - 100});
+        $('.tree-div').css({'height': ($(window).height()) - 122});
+    });	
+	// Scroll
+	//$('.scrollbox').enscroll();
+});
+
+</script>
+</body>
+</html>
