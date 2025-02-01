@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1406qdf4gdrf"]
+
+[ext_resource type="Script" path="res://camera_2d.gd" id="1_8jth8"]
+[ext_resource type="PackedScene" uid="uid://biijdxa5vbai2" path="res://a node.tscn" id="2_7kbvo"]
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 4
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("1_8jth8")
+
+[node name="ColorRect2" type="ColorRect" parent="Camera2D"]
+z_index = -1
+offset_left = -631.5
+offset_top = -343.5
+offset_right = 1846.5
+offset_bottom = 1082.5
+color = Color(0.130178, 0.128146, 0.158041, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
+texture_filter = 4
+
+[node name="the start" type="Node2D" parent="THE UNDERSTANDING TREE"]
+texture_filter = 4
+
+[node name="node1" parent="THE UNDERSTANDING TREE/the start" instance=ExtResource("2_7kbvo")]

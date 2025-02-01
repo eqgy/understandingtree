@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://biijdxa5vbai2"]
+
+[ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
+[ext_resource type="Script" path="res://button.gd" id="2_g56ri"]
+
+[node name="node1" type="Node2D"]
+texture_filter = 3
+script = ExtResource("1_lkhld")
+
+[node name="title" type="Button" parent="."]
+z_index = 2
+texture_filter = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -27.5
+offset_right = 111.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_ssop8")
+toggle_mode = true
+text = "climate change"
+script = ExtResource("2_g56ri")
+
+[node name="addbranch" type="Button" parent="title"]
+visible = false
+show_behind_parent = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 53.0
+offset_right = 199.0
+offset_bottom = 89.0
+theme = ExtResource("1_ssop8")
+text = "add a branch"
+script = ExtResource("2_g56ri")
+
+[connection signal="toggled" from="title" to="title/addbranch" method="_on_button_toggled"]
+[connection signal="pressed" from="title/addbranch" to="." method="_on_addbranch_pressed"]

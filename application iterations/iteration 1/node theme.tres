@@ -1,0 +1,31 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bosbvfdtv48xf"]
+
+[ext_resource type="FontFile" uid="uid://d3ftebbowlidb" path="res://Futura Light.ttf" id="1_c3wsk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olyi6"]
+bg_color = Color(0.380666, 0.319477, 0.447316, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ers"]
+bg_color = Color(0.229108, 0.203842, 0.249519, 1)
+border_color = Color(0.849719, 0.767631, 0.87436, 0.509804)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbbqy"]
+bg_color = Color(0.26543, 0.223002, 0.311431, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+Button/fonts/font = ExtResource("1_c3wsk")
+Button/styles/hover = SubResource("StyleBoxFlat_olyi6")
+Button/styles/normal = SubResource("StyleBoxFlat_g4ers")
+Button/styles/pressed = SubResource("StyleBoxFlat_xbbqy")
