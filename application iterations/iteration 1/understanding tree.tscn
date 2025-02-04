@@ -13,10 +13,10 @@ script = ExtResource("1_8jth8")
 
 [node name="ColorRect2" type="ColorRect" parent="Camera2D"]
 z_index = -1
-offset_left = -631.5
-offset_top = -343.5
-offset_right = 1846.5
-offset_bottom = 1082.5
+offset_left = -547.0
+offset_top = -319.0
+offset_right = 1931.0
+offset_bottom = 1107.0
 color = Color(0.130178, 0.128146, 0.158041, 1)
 
 [node name="Control" type="Control" parent="."]

@@ -30,7 +30,6 @@ text = "climate change"
 script = ExtResource("2_g56ri")
 
 [node name="addbranch" type="Button" parent="title"]
-visible = false
 show_behind_parent = true
 layout_mode = 0
 offset_left = 18.0
