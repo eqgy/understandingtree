@@ -11,19 +11,19 @@ scale = Vector2(2, 2)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("1_8jth8")
 
+[node name="ColorRect2" type="ColorRect" parent="Camera2D"]
+z_index = -1
+offset_left = -547.0
+offset_top = -319.0
+offset_right = 1931.0
+offset_bottom = 1107.0
+color = Color(0.130178, 0.128146, 0.158041, 1)
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="ColorRect2" type="ColorRect" parent="Control"]
-z_index = -1
-offset_left = -1094.0
-offset_top = -638.0
-offset_right = 1384.0
-offset_bottom = 788.0
-color = Color(0.130178, 0.128146, 0.158041, 1)
 
 [node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
 texture_filter = 4
