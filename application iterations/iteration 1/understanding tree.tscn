@@ -19,6 +19,7 @@ offset_bottom = 40.0
 
 [node name="ColorRect2" type="ColorRect" parent="Control"]
 z_index = -1
+layout_mode = 0
 offset_left = -1094.0
 offset_top = -638.0
 offset_right = 1384.0
