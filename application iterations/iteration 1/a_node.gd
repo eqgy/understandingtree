@@ -19,9 +19,9 @@ func add_line():
 			if parent is Node2D && "too" in parent:
 				var line = Line2D.new()
 				var parent = get_parent()
-				line.global_position = parent.global_position
 				line.add_point(Vector2(0,0)) #add a point at its initital position
-				line.add_point(position)
+				line.add_point(-position)
+				#line.add_point(position)
 				add_child(line)
 			has_line = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
