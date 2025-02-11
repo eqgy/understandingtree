@@ -55,3 +55,7 @@ func _on_addbranch_pressed2():
 	problems += 1
 	$title2.add_child(child)
 	print(children)
+
+
+func _on_button_toggled(toggled_on):
+	pass # Replace with function body.
