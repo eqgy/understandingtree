@@ -41,6 +41,7 @@ points = PackedVector2Array(0, 0, 200, 1)
 width_curve = SubResource("Curve_ottr0")
 
 [node name="Expand Idea" type="Button" parent="title"]
+visible = false
 show_behind_parent = true
 layout_mode = 0
 offset_left = 21.0
@@ -50,6 +51,29 @@ offset_bottom = 4.0
 theme = ExtResource("1_ssop8")
 text = "Expand Idea
 "
+script = ExtResource("2_g56ri")
+
+[node name="Divergent Idea" type="Button" parent="title"]
+visible = false
+show_behind_parent = true
+offset_left = 21.0
+offset_top = -63.0
+offset_right = 202.0
+offset_bottom = -27.0
+theme = ExtResource("1_ssop8")
+text = "Diverge
+"
+script = ExtResource("2_g56ri")
+
+[node name="Counterargument" type="Button" parent="title"]
+visible = false
+show_behind_parent = true
+offset_left = 21.0
+offset_top = -93.0
+offset_right = 202.0
+offset_bottom = -57.0
+theme = ExtResource("1_ssop8")
+text = "Counter"
 script = ExtResource("2_g56ri")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -98,6 +122,7 @@ points = PackedVector2Array(-111.29, -116.411, 79.7259, -203.639)
 width_curve = SubResource("Curve_ottr0")
 
 [node name="Expand Idea" type="Button" parent="title2"]
+visible = false
 show_behind_parent = true
 layout_mode = 0
 offset_left = 18.0
@@ -105,10 +130,38 @@ offset_top = 53.0
 offset_right = 199.0
 offset_bottom = 89.0
 theme = ExtResource("1_ssop8")
-text = "Expand Idea"
+text = "Expand"
+script = ExtResource("2_g56ri")
+
+[node name="Divergent Idea" type="Button" parent="title2"]
+visible = false
+show_behind_parent = true
+offset_left = 18.0
+offset_top = 82.0
+offset_right = 199.0
+offset_bottom = 118.0
+theme = ExtResource("1_ssop8")
+text = "Diverge"
+script = ExtResource("2_g56ri")
+
+[node name="Counterargument" type="Button" parent="title2"]
+visible = false
+show_behind_parent = true
+offset_left = 18.0
+offset_top = 113.0
+offset_right = 199.0
+offset_bottom = 149.0
+theme = ExtResource("1_ssop8")
+text = "Counter"
 script = ExtResource("2_g56ri")
 
 [connection signal="toggled" from="title" to="title/Expand Idea" method="_on_button_toggled"]
+[connection signal="toggled" from="title" to="title/Divergent Idea" method="_on_button_toggled"]
+[connection signal="toggled" from="title" to="title/Counterargument" method="_on_title_toggled"]
 [connection signal="pressed" from="title/Expand Idea" to="." method="_on_addbranch_pressed"]
 [connection signal="toggled" from="title2" to="title2/Expand Idea" method="_on_button_toggled"]
+[connection signal="toggled" from="title2" to="title2/Divergent Idea" method="_on_button_toggled"]
+[connection signal="toggled" from="title2" to="title2/Counterargument" method="_on_button_toggled"]
 [connection signal="pressed" from="title2/Expand Idea" to="." method="_on_addbranch_pressed2"]
+[connection signal="pressed" from="title2/Divergent Idea" to="." method="_on_addbranch_pressed2"]
+[connection signal="pressed" from="title2/Counterargument" to="." method="_on_addbranch_pressed2"]
