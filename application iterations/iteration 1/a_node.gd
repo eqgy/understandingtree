@@ -15,13 +15,17 @@ func add_line():
 		if stop <= 30:
 			stop += 1
 			parent = get_parent()
+			if parent == null:
+				pass
+			else:
+				parent = parent.get_parent()
 	if parent != null:
 		if has_line == false:
 			if parent is Node2D && "too" in parent:
 				var line = Line2D.new()
-				line.set_width(5)
 				line.add_point(Vector2(0,0)) #add a point at its initital position
 				line.add_point(-position)
+				line.z_index=-1
 				add_child(line)
 			has_line = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +36,7 @@ func _process(delta):
 
 func _on_addbranch_pressed():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(400, 100*children)
+	var position_offset = Vector2(400*children, 20*children)
 	child.position = position_offset
 	child.add_line()
 	children += 1
@@ -43,7 +47,7 @@ func _on_addbranch_pressed():
 
 func _on_addbranch_pressed2():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(400,200*problems + 100) #100 is the length of the button
+	var position_offset = Vector2(400,300*problems + 100) #100 is the length of the button
 	child.position = position_offset
 	#child.position.y += 100*children
 	#child.position.x  += 400 
