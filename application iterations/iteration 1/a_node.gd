@@ -37,6 +37,18 @@ func _on_addbranch_pressed():
 	#child.position.x  += 400
 	child.add_line()
 	children += 1
-	add_child(child)
+	$title2.add_child(child)
 	print(children)
 	pass # Replace with function body.
+
+
+func _on_addbranch_pressed2():
+	var child = load("res://a node.tscn").instantiate()
+	var position_offset = Vector2(400, 100*children)
+	child.position = position_offset
+	#child.position.y += 100*children
+	#child.position.x  += 400
+	child.add_line()
+	children += 1
+	$title2.add_child(child)
+	print(children)
