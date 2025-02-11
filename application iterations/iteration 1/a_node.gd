@@ -1,6 +1,7 @@
 extends Node2D
-
 var children = 0
+var problems = 0
+var solutions = 0
 var stop = 0
 var too = "A NODE"
 var has_line = false
@@ -33,8 +34,6 @@ func _on_addbranch_pressed():
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(400, 100*children)
 	child.position = position_offset
-	#child.position.y += 100*children
-	#child.position.x  += 400
 	child.add_line()
 	children += 1
 	$title2.add_child(child)
@@ -44,11 +43,11 @@ func _on_addbranch_pressed():
 
 func _on_addbranch_pressed2():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(400, 100*children)
+	var position_offset = Vector2(400,200*problems + 100) #100 is the length of the button
 	child.position = position_offset
 	#child.position.y += 100*children
-	#child.position.x  += 400
+	#child.position.x  += 400 
 	child.add_line()
-	children += 1
+	problems += 1
 	$title2.add_child(child)
 	print(children)
