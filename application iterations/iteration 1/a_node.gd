@@ -20,7 +20,7 @@ func add_line():
 		if stop <= 30:
 			stop += 1
 			parent = get_parent()
-			if parent == null:
+			if parent == null || parent is Node2D:
 				pass
 			else:
 				parent = parent.get_parent()
@@ -30,10 +30,14 @@ func add_line():
 				var line = Line2D.new()
 				line.add_point(Vector2(0,0)) #add a point at its initital position
 				#line.add_point(-position)
-				line.add_point(-(global_position-parent.global_position))
+				var new_x = position.x
+				var new_y = position.y - 10
+				var new_pos = Vector2(new_x,new_y)
+				line.add_point(-position)
 				line.z_index=-1
 				add_child(line)
 			has_line = true
+				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -74,18 +78,18 @@ func _on_expand_pressed2(arg):
 #DIVERING BRANCH FUNCTIONS
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(-90, 300 + 200*prob_diverges)
+	var position_offset = Vector2(0, 300 + 200*prob_diverges)
 	child.position = position_offset
 	child.add_line()
-	$title2.add_child(child)
+	add_child(child)
 	prob_diverges +=1
 	
 func solution_diverge():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(-90, -300 -200*solution_diverges)
+	var position_offset = Vector2(0, -300 -200*solution_diverges)
 	child.position = position_offset
 	child.add_line()
-	$title.add_child(child)
+	add_child(child)
 	solution_diverges +=1
 	
 func problem_expand():
