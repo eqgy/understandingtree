@@ -30,7 +30,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_ssop8")
 toggle_mode = true
-text = "climate change"
 script = ExtResource("2_g56ri")
 
 [node name="Line2D" type="Line2D" parent="title"]
@@ -113,7 +112,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_ssop8")
 toggle_mode = true
-text = "climate change"
 script = ExtResource("2_g56ri")
 
 [node name="Line2D" type="Line2D" parent="title2"]
