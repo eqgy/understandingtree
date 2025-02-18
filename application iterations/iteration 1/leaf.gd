@@ -7,12 +7,10 @@ func _ready():
 
 func _input(event):
 	if button_pressed == true:
-		print("selected")
 		if event is InputEventMouseButton and event.pressed:
-			await get_tree().create_timer(.05).timeout
+			await get_tree().create_timer(.5).timeout
 			emit_signal("toggled", button_pressed)
 			button_pressed = false
-			print("tried to toggle ")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

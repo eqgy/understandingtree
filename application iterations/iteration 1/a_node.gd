@@ -1,6 +1,8 @@
 extends Node2D
 
 var children = 0
+@onready var problem_leaf = $problem
+@onready var solution_leaf =$solution
 var problems = 0
 var solutions = 0
 var stop = 0
@@ -44,28 +46,12 @@ func _process(delta):
 		add_line()
 
 func problem_counterarg():
-	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(400 * children, 20 * children)
-	child.position = position_offset
-	child.add_line()
-	children += 1
-	$title2.add_child(child)
-	
-	# Add a CustomLineEdit to the child
-	add_custom_line_edit_to_child(2)  # <-- Highlighted change
-	print(children)
+	get_child(0).visible = true
+	get_child(1).visible = true
 
 func solution_counterarg(toggled_on):
-	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(400 * children, 20 * children)
-	child.position = position_offset
-	child.add_line()
-	children += 1
-	$title2.add_child(child)
-	
-	# Add a CustomLineEdit to the child
-	add_custom_line_edit_to_child(2)  # <-- Highlighted change
-	print(children)
+	get_child(1).visible = true
+	get_child(0).visible = true
 
 func _on_expand_pressed2(arg):
 	var child = load("res://a node.tscn").instantiate()
@@ -78,11 +64,13 @@ func _on_expand_pressed2(arg):
 	child.position = position_offset
 	child.add_line()
 	if arg == 1: # If it is a problem, add the child to title2
-		$title2.add_child(child)
+		problem_leaf.add_child(child)
 		problems += 1
+		child.get_node("solution").visible = false
 	else: # If it is a solution, add the child to title
-		$title.add_child(child)
+		solution_leaf.add_child(child)
 		solutions += 1
+		child.get_node("problem").visible = false
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
@@ -90,22 +78,23 @@ func _on_expand_pressed2(arg):
 
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(0, 300 + 200 * prob_diverges)
+	var position_offset = Vector2(0, 400 * (prob_diverges+1))
 	child.position = position_offset
 	child.add_line()
 	add_child(child)
 	prob_diverges += 1
-	
+	child.get_node("solution").visible = false
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
 func solution_diverge():
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(0, -300 - 200 * solution_diverges)
+	var position_offset = Vector2(0, -400 * (solution_diverges+1))
 	child.position = position_offset
 	child.add_line()
 	add_child(child)
 	solution_diverges += 1
+	child.get_node("problem").visible = false
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
