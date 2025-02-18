@@ -43,7 +43,19 @@ func _process(delta):
 	if stop <= 30:
 		add_line()
 
-func _on_addbranch_pressed():
+func problem_counterarg():
+	var child = load("res://a node.tscn").instantiate()
+	var position_offset = Vector2(400 * children, 20 * children)
+	child.position = position_offset
+	child.add_line()
+	children += 1
+	$title2.add_child(child)
+	
+	# Add a CustomLineEdit to the child
+	add_custom_line_edit_to_child(2)  # <-- Highlighted change
+	print(children)
+
+func solution_counterarg(toggled_on):
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(400 * children, 20 * children)
 	child.position = position_offset
@@ -112,12 +124,12 @@ func add_custom_line_edit_to_child(num):
 		var custom_line_edit = Text.new()  # Create an instance of CustomLineEdit
 		custom_line_edit.text = "Branch " + str(children)  # Set default text
 		custom_line_edit.position = Vector2(20, 12)  # Position it above the title
-		$title.add_child(custom_line_edit)  # Attach it to title
+		#$title.add_child(custom_line_edit)  # Attach it to title
 		
 		var custom_line_edit2 = Text.new()  # Create an instance of CustomLineEdit
 		custom_line_edit2.text = "Branch " + str(children)  # Set default text
 		custom_line_edit2.position = Vector2(20, 12)  # Position it above the title
-		$title2.add_child(custom_line_edit2)  # Attach it to title2
+		#$title2.add_child(custom_line_edit2)  # Attach it to title2
 		
 		custom_line_edit.z_index = 10  # Ensure it is drawn above other elements
 		custom_line_edit2.z_index = 10  # Ensure it is drawn above other elements
