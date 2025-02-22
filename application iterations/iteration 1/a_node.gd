@@ -20,6 +20,7 @@ func _ready():
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
 func add_line():
+	var is_expand = false
 	if parent == null:
 		if stop <= 30:
 			stop += 1
@@ -27,16 +28,19 @@ func add_line():
 			if parent == null || parent is Node2D:
 				pass
 			else:
+				is_expand = true
 				parent = parent.get_parent()
 	if parent != null:
 		if has_line == false:
 			if parent is Node2D && "too" in parent:
 				var line = Line2D.new()
-				line.add_point(Vector2(0, 0)) # Add a point at its initial position
-				var new_x = position.x
-				var new_y = position.y - 10
+				line.add_point(Vector2(0,0)) # Add a point at its initial position
+				var new_x = -position.x
+				if is_expand:
+					new_x = -(position.x-150) #If the branch is being expanded, ensure that the line is centered on the button
+				var new_y = -position.y
 				var new_pos = Vector2(new_x, new_y)
-				line.add_point(-position)
+				line.add_point(new_pos)
 				line.z_index = -1
 				add_child(line)
 			has_line = true

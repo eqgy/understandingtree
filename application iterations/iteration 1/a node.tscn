@@ -32,6 +32,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_ssop8")
 toggle_mode = true
 script = ExtResource("2_g56ri")
+metadata/_edit_use_anchors_ = true
 
 [node name="Line2D" type="Line2D" parent="solution"]
 z_index = -1
@@ -92,6 +93,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+metadata/_edit_use_anchors_ = true
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
@@ -114,6 +116,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_ssop8")
 toggle_mode = true
 script = ExtResource("2_g56ri")
+metadata/_edit_use_anchors_ = true
 
 [node name="Line2D" type="Line2D" parent="problem"]
 z_index = -1
