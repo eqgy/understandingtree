@@ -11,9 +11,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_solution_toggled(toggled_on: bool) -> void:
+func _on_solution_toggled(toggled_on):
 	visible = toggled_on
 
 
-func _on_problem_toggled(toggled_on: bool) -> void:
-	pass # Replace with function body.
+func _on_problem_toggled(toggled_on):
+	visible = toggled_on

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=7 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
 [ext_resource type="Script" path="res://leaf.gd" id="2_g56ri"]
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
+[ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -78,6 +79,16 @@ offset_bottom = -57.0
 theme = ExtResource("1_ssop8")
 text = "Counter"
 script = ExtResource("4_pq1f4")
+
+[node name="Delete" type="Button" parent="solution"]
+visible = false
+layout_mode = 0
+offset_left = 21.0
+offset_top = -129.0
+offset_right = 202.0
+offset_bottom = -89.0
+text = "Delete"
+script = ExtResource("5_iskqk")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
@@ -161,10 +172,22 @@ theme = ExtResource("1_ssop8")
 text = "Counter"
 script = ExtResource("4_pq1f4")
 
+[node name="Delete" type="Button" parent="problem"]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 147.0
+offset_right = 199.0
+offset_bottom = 187.0
+text = "Delete
+"
+script = ExtResource("5_iskqk")
+
 [connection signal="toggled" from="solution" to="solution" method="_on_toggled"]
 [connection signal="toggled" from="solution" to="solution/Expand Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="solution" to="solution/Divergent Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="solution" to="solution/Counterargument" method="_on_button_toggled"]
+[connection signal="toggled" from="solution" to="solution/Delete" method="_on_solution_toggled"]
 [connection signal="pressed" from="solution/Expand Idea" to="." method="solution_expand"]
 [connection signal="pressed" from="solution/Divergent Idea" to="." method="solution_diverge"]
 [connection signal="toggled" from="solution/Counterargument" to="." method="solution_counterarg"]
@@ -172,6 +195,7 @@ script = ExtResource("4_pq1f4")
 [connection signal="toggled" from="problem" to="problem/Expand Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Divergent Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Counterargument" method="_on_button_toggled"]
+[connection signal="toggled" from="problem" to="problem/Delete" method="_on_problem_toggled"]
 [connection signal="pressed" from="problem/Expand Idea" to="." method="problem_expand"]
 [connection signal="pressed" from="problem/Divergent Idea" to="." method="problem_diverge"]
 [connection signal="pressed" from="problem/Counterargument" to="." method="problem_counterarg"]
