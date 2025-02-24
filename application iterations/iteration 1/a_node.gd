@@ -144,6 +144,9 @@ func _on_button_toggled(toggled_on):
 func _on_solution_delete_pressed():
 	parent = get_parent()
 	var is_expand = determine_type()
+	if !("problems" in parent):
+		print("this is the base node. You cannot delete it.")
+		return
 	if is_expand:
 		parent.solutions -=1
 	else:
@@ -154,9 +157,9 @@ func _on_solution_delete_pressed():
 func _on_problem_delete_pressed() -> void:
 	parent = get_parent()
 	var is_expand = determine_type()
-	#if parent.get_class() == "Node2D":
-		#print("this is the base node. You cannot delete it.")
-		#return
+	if !("problems" in parent):
+		print("this is the base node. You cannot delete it.")
+		return
 	if is_expand:
 		parent.problems-=1
 	else:
