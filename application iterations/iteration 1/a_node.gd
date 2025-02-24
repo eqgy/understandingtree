@@ -19,8 +19,18 @@ func _ready():
 	connect("problem_or_solution", _on_expand_pressed2)
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
-func add_line():
+func determine_type():
 	var is_expand = false
+	parent = get_parent()
+	if parent == null || parent is Node2D:
+		pass
+	else:
+		is_expand = true
+		parent = parent.get_parent()
+	return is_expand
+
+func add_line():
+	var is_expand = determine_type()
 	if parent == null:
 		if stop <= 30:
 			stop += 1
@@ -129,5 +139,26 @@ func add_custom_line_edit_to_child(num):
 func _on_button_toggled(toggled_on):
 	pass
 
-func _on_expand_idea_pressed2() -> void:
-	pass
+
+
+func _on_solution_delete_pressed():
+	parent = get_parent()
+	var is_expand = determine_type()
+	if is_expand:
+		parent.solutions -=1
+	else:
+		parent.solution_diverges -=1
+	queue_free()
+	
+
+func _on_problem_delete_pressed() -> void:
+	parent = get_parent()
+	var is_expand = determine_type()
+	#if parent.get_class() == "Node2D":
+		#print("this is the base node. You cannot delete it.")
+		#return
+	if is_expand:
+		parent.problems-=1
+	else:
+		parent.prob_diverges -=1
+	queue_free()

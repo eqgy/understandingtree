@@ -191,6 +191,7 @@ script = ExtResource("5_iskqk")
 [connection signal="pressed" from="solution/Expand Idea" to="." method="solution_expand"]
 [connection signal="pressed" from="solution/Divergent Idea" to="." method="solution_diverge"]
 [connection signal="toggled" from="solution/Counterargument" to="." method="solution_counterarg"]
+[connection signal="pressed" from="solution/Delete" to="." method="_on_solution_delete_pressed"]
 [connection signal="toggled" from="problem" to="problem" method="_on_toggled"]
 [connection signal="toggled" from="problem" to="problem/Expand Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Divergent Idea" method="_on_button_toggled"]
@@ -199,3 +200,4 @@ script = ExtResource("5_iskqk")
 [connection signal="pressed" from="problem/Expand Idea" to="." method="problem_expand"]
 [connection signal="pressed" from="problem/Divergent Idea" to="." method="problem_diverge"]
 [connection signal="pressed" from="problem/Counterargument" to="." method="problem_counterarg"]
+[connection signal="pressed" from="problem/Delete" to="." method="_on_problem_delete_pressed"]
