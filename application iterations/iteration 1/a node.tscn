@@ -90,24 +90,6 @@ offset_bottom = -89.0
 text = "Delete"
 script = ExtResource("5_iskqk")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-metadata/_edit_use_anchors_ = true
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-
 [node name="problem" type="Button" parent="."]
 z_index = 2
 texture_filter = 5
@@ -183,6 +165,24 @@ text = "Delete
 "
 script = ExtResource("5_iskqk")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+
 [connection signal="toggled" from="solution" to="solution" method="_on_toggled"]
 [connection signal="toggled" from="solution" to="solution/Expand Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="solution" to="solution/Divergent Idea" method="_on_button_toggled"]
@@ -190,6 +190,7 @@ script = ExtResource("5_iskqk")
 [connection signal="toggled" from="solution" to="solution/Delete" method="_on_solution_toggled"]
 [connection signal="pressed" from="solution/Expand Idea" to="." method="solution_expand"]
 [connection signal="pressed" from="solution/Divergent Idea" to="." method="solution_diverge"]
+[connection signal="pressed" from="solution/Counterargument" to="." method="solution_counterarg"]
 [connection signal="toggled" from="solution/Counterargument" to="." method="solution_counterarg"]
 [connection signal="pressed" from="solution/Delete" to="." method="_on_solution_delete_pressed"]
 [connection signal="toggled" from="problem" to="problem" method="_on_toggled"]

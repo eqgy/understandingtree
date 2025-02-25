@@ -60,12 +60,12 @@ func _process(delta):
 		add_line()
 
 func problem_counterarg():
-	get_child(0).visible = true
-	get_child(1).visible = true
+	problem_leaf.visible = true
+	solution_leaf.visible = true
 
-func solution_counterarg(toggled_on):
-	get_child(1).visible = true
-	get_child(0).visible = true
+func solution_counterarg():
+	problem_leaf.visible = true
+	solution_leaf.visible = true
 
 func _on_expand_pressed2(arg):
 	var child = load("res://a node.tscn").instantiate()
@@ -151,7 +151,9 @@ func _on_solution_delete_pressed():
 		parent.solutions -=1
 	else:
 		parent.solution_diverges -=1
-	queue_free()
+	$solution.queue_free()
+	if $problem.visible == false:
+		queue_free()
 	
 
 func _on_problem_delete_pressed() -> void:
@@ -164,4 +166,6 @@ func _on_problem_delete_pressed() -> void:
 		parent.problems-=1
 	else:
 		parent.prob_diverges -=1
-	queue_free()
+	$problem.queue_free()
+	if $solution.visible == false:
+		queue_free()
