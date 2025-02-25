@@ -151,7 +151,9 @@ func _on_solution_delete_pressed():
 		parent.solutions -=1
 	else:
 		parent.solution_diverges -=1
-	$solution.queue_free()
+	for child in $solution.get_children():
+		child.queue_free()
+	$solution.visible = false
 	if $problem.visible == false:
 		queue_free()
 	
@@ -166,6 +168,8 @@ func _on_problem_delete_pressed() -> void:
 		parent.problems-=1
 	else:
 		parent.prob_diverges -=1
-	$problem.queue_free()
+	for child in $problem.get_children():
+		child.queue_free()
+	$problem.visible = false
 	if $solution.visible == false:
 		queue_free()
