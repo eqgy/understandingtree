@@ -174,4 +174,10 @@ func _on_problem_delete_pressed() -> void:
 	$problem.visible = false
 	if $solution.visible == false:
 		queue_free()
+
+func export()-> String:
+	var data = "[s]" + $solution.text + " [p]" + $problem.text + "\n"
+	for child in get_children():
+		pass
+	return data
 	
