@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=11 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
 [ext_resource type="Script" path="res://leaf.gd" id="2_g56ri"]
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
+[ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -110,6 +111,7 @@ theme = SubResource("Theme_pyf3n")
 placeholder_text = "(unwritten)"
 clear_button_enabled = true
 drag_and_drop_selection_enabled = false
+script = ExtResource("6_3ocxf")
 
 [node name="problem" type="Button" parent="."]
 z_index = 2
@@ -185,6 +187,18 @@ offset_bottom = 187.0
 text = "Delete
 "
 script = ExtResource("5_iskqk")
+
+[node name="LineEdit" type="LineEdit" parent="problem"]
+visible = false
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 220.0
+offset_bottom = 52.0
+theme = SubResource("Theme_pyf3n")
+placeholder_text = "(unwritten)"
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+script = ExtResource("6_3ocxf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8

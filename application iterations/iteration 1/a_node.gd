@@ -58,6 +58,7 @@ func add_line():
 func _process(delta):
 	if stop <= 30:
 		add_line()
+	
 
 func problem_counterarg():
 	problem_leaf.visible = true
@@ -173,3 +174,4 @@ func _on_problem_delete_pressed() -> void:
 	$problem.visible = false
 	if $solution.visible == false:
 		queue_free()
+	
