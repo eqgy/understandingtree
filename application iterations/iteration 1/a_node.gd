@@ -103,6 +103,7 @@ func problem_diverge():
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
 func solution_diverge():
+	print("IM TRYING")
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(0, -400 * (solution_diverges+1))
 	child.position = position_offset
