@@ -64,30 +64,58 @@ func _process(delta):
 	
 
 func problem_counterarg():
-	if prob_counterarg < sol_counterarg:
+	var done = false
+	if !solution_leaf.visible:
 		solution_leaf.visible = true
 	else:
-		var child = load("res://a node.tscn").instantiate()
-		var position_offset = Vector2(300 + 300 * prob_counterarg, 0)
-		child.position = position_offset
-		child.add_line()
-		add_child(child)
-		child.solution_leaf.visible = true
-		child.problem_leaf.visible = false
-	prob_counterarg = prob_counterarg + 1
+		var count = 0
+		var par = self
+		var first_node = self
+		while par:
+			first_node = par
+			par = par.get_parent()
+		for c in first_node.get_children():
+			if "problems" in c:
+				count +=1
+				if !c.solution_leaf.visible:
+					c.solution_leaf.visible = true
+					done = true
+					break
+		if !done:
+			var child = load("res://a node.tscn").instantiate()
+			var position_offset = Vector2(300 + 300*count, 0)
+			child.position = position_offset
+			first_node.add_child(child)
+			child.add_line()
+			child.solution_leaf.visible = true
+			child.problem_leaf.visible = false
 
 func solution_counterarg():
-	if sol_counterarg ==0 && prob_counterarg == 0 && !problem_leaf.visible:
+	var done = false
+	if !problem_leaf.visible:
 		problem_leaf.visible = true
 	else:
-		var child = load("res://a node.tscn").instantiate()
-		var position_offset = Vector2(300 + 300 * sol_counterarg, 0)
-		child.position = position_offset
-		child.add_line()
-		add_child(child)
-		child.problem_leaf.visible = true
-		child.solution_leaf.visible = false
-	sol_counterarg = sol_counterarg + 1
+		var count = 0
+		var par = self
+		var first_node = self
+		while par:
+			first_node = par
+			par = par.get_parent()
+		for c in first_node.get_children():
+			if "problems" in c:
+				count +=1
+				if !c.problem_leaf.visible:
+					c.problem_leaf.visible = true
+					done = true
+					break
+		if !done:
+			var child = load("res://a node.tscn").instantiate()
+			var position_offset = Vector2(300+count * 300, 0)
+			child.position = position_offset
+			first_node.add_child(child)
+			child.add_line()
+			child.solution_leaf.visible = false
+			child.problem_leaf.visible = true
 
 func _on_expand_pressed2(arg):
 	var child = load("res://a node.tscn").instantiate()

@@ -18,7 +18,7 @@ func _process(delta):
 	if button_pressed == true:
 		text_retainer = text
 		text = ""
-		lineedit.visible = true
+		#lineedit.visible = true
 		
 	if Input.is_action_just_pressed("enter"):
 		if lineedit:
