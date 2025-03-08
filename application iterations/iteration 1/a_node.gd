@@ -9,6 +9,9 @@ var stop = 0
 var too = "A NODE"
 var has_line = false
 
+var sol_counterarg = 0
+var prob_counterarg = 0
+
 var prob_diverges = 0
 var solution_diverges = 0
 
@@ -60,12 +63,30 @@ func _process(delta):
 		add_line()
 
 func problem_counterarg():
-	problem_leaf.visible = true
-	solution_leaf.visible = true
+	if prob_counterarg < sol_counterarg:
+		solution_leaf.visible = true
+	else:
+		var child = load("res://a node.tscn").instantiate()
+		var position_offset = Vector2(300 + 300 * prob_counterarg, 0)
+		child.position = position_offset
+		child.add_line()
+		add_child(child)
+		child.solution_leaf.visible = true
+		child.problem_leaf.visible = false
+	prob_counterarg = prob_counterarg + 1
 
 func solution_counterarg():
-	problem_leaf.visible = true
-	solution_leaf.visible = true
+	if sol_counterarg ==0 && prob_counterarg == 0 && !problem_leaf.visible:
+		problem_leaf.visible = true
+	else:
+		var child = load("res://a node.tscn").instantiate()
+		var position_offset = Vector2(300 + 300 * sol_counterarg, 0)
+		child.position = position_offset
+		child.add_line()
+		add_child(child)
+		child.problem_leaf.visible = true
+		child.solution_leaf.visible = false
+	sol_counterarg = sol_counterarg + 1
 
 func _on_expand_pressed2(arg):
 	var child = load("res://a node.tscn").instantiate()
@@ -74,21 +95,34 @@ func _on_expand_pressed2(arg):
 		off_set_weight = problems
 	else:
 		off_set_weight = solutions
-	var position_offset = Vector2(400, arg * 100 + 200 * off_set_weight * arg) # 100 is the length of the button
+	var position_offset = Vector2(400, arg * 100) # 100 is the length of the button
 	child.position = position_offset
 	child.add_line()
-	if arg == 1: # If it is a problem, add the child to title2
-		problem_leaf.add_child(child)
-		problems += 1
-		child.get_node("solution").visible = false
+	if arg == 1: # If it is a problem , add the child to title2
+		if (problems != 0):
+			var expand_parent = self
+			for c in $problem.get_children():
+				if "problems" in c:
+					expand_parent = c
+			expand_parent._on_expand_pressed2(1)
+		else:
+			problem_leaf.add_child(child)
+			problems+= 1
+			child.get_node("solution").visible = false
 	else: # If it is a solution, add the child to title
-		solution_leaf.add_child(child)
-		solutions += 1
-		child.get_node("problem").visible = false
+		if (solutions != 0):
+			var expand_parent = self
+			for c in $problem.get_children():
+				if "problems" in c:
+					expand_parent = c
+			expand_parent._on_expand_pressed2(-1)
+		else:
+			solution_leaf.add_child(child)
+			solutions += 1
+			child.get_node("problem").visible = false
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
-	print(children)
 
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
@@ -136,6 +170,8 @@ func add_custom_line_edit_to_child(num):
 		
 		custom_line_edit.z_index = 10  # Ensure it is drawn above other elements
 		custom_line_edit2.z_index = 10  # Ensure it is drawn above other elements
+		
+		
 func _on_button_toggled(toggled_on):
 	pass
 
