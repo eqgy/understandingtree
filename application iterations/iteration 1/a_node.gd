@@ -58,6 +58,16 @@ func add_line():
 				add_child(line)
 			has_line = true
 
+func add_line_counterarg():
+	var line = Line2D.new()
+	line.add_point(Vector2(0,0)) # Add a point at its initial position
+	var new_x = -position.x
+	var new_y = -position.y
+	var new_pos = Vector2(new_x, new_y)
+	line.add_point(new_pos)
+	line.z_index = -1
+	add_child(line)
+	
 func _process(delta):
 	if stop <= 30:
 		add_line()
@@ -86,7 +96,7 @@ func problem_counterarg():
 			var position_offset = Vector2(300 + 300*count, 0)
 			child.position = position_offset
 			first_node.add_child(child)
-			child.add_line()
+			child.add_line_counterarg()
 			child.solution_leaf.visible = true
 			child.problem_leaf.visible = false
 
@@ -113,7 +123,7 @@ func solution_counterarg():
 			var position_offset = Vector2(300+count * 300, 0)
 			child.position = position_offset
 			first_node.add_child(child)
-			child.add_line()
+			child.add_line_counterarg()
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
 
@@ -124,7 +134,7 @@ func _on_expand_pressed2(arg):
 		off_set_weight = problems
 	else:
 		off_set_weight = solutions
-	var position_offset = Vector2(400, arg * 100) # 100 is the length of the button
+	var position_offset = Vector2(450, arg * 200) # 100 is the length of the button
 	child.position = position_offset
 	child.add_line()
 	if arg == 1: # If it is a problem , add the child to title2
