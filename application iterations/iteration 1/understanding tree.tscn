@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1406qdf4gdrf"]
+[gd_scene load_steps=5 format=3 uid="uid://b1406qdf4gdrf"]
 
 [ext_resource type="Script" path="res://camera_2d.gd" id="1_8jth8"]
 [ext_resource type="PackedScene" uid="uid://biijdxa5vbai2" path="res://a node.tscn" id="2_7kbvo"]
+[ext_resource type="Script" path="res://tree functions.gd" id="2_eq62t"]
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="2_jsh6r"]
 
 [node name="Node2D" type="Node2D"]
 texture_filter = 4
@@ -18,18 +20,42 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ColorRect2" type="ColorRect" parent="Control"]
-z_index = -1
+visible = false
+z_index = -5
 layout_mode = 0
-offset_left = -1094.0
-offset_top = -638.0
-offset_right = 1384.0
-offset_bottom = 788.0
+offset_left = -2053.0
+offset_top = -2211.0
+offset_right = 4546.0
+offset_bottom = 1864.0
 color = Color(0.130178, 0.128146, 0.158041, 1)
 
 [node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
 texture_filter = 4
 
+[node name="export" type="Button" parent="THE UNDERSTANDING TREE"]
+z_index = 1
+offset_left = -180.0
+offset_top = -38.0
+offset_right = -57.0
+offset_bottom = -2.0
+theme = ExtResource("2_jsh6r")
+text = "export"
+
+[node name="import" type="Button" parent="THE UNDERSTANDING TREE"]
+z_index = 1
+offset_left = -181.0
+offset_top = 2.0
+offset_right = -58.0
+offset_bottom = 38.0
+theme = ExtResource("2_jsh6r")
+text = "import
+"
+
 [node name="the start" type="Node2D" parent="THE UNDERSTANDING TREE"]
 texture_filter = 4
+script = ExtResource("2_eq62t")
 
 [node name="node1" parent="THE UNDERSTANDING TREE/the start" instance=ExtResource("2_7kbvo")]
+
+[connection signal="pressed" from="THE UNDERSTANDING TREE/export" to="THE UNDERSTANDING TREE/the start" method="_on_export_pressed"]
+[connection signal="pressed" from="THE UNDERSTANDING TREE/import" to="THE UNDERSTANDING TREE/the start" method="_on_import_pressed"]

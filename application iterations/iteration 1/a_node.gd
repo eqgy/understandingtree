@@ -61,6 +61,7 @@ func add_line():
 func _process(delta):
 	if stop <= 30:
 		add_line()
+	
 
 func problem_counterarg():
 	if prob_counterarg < sol_counterarg:
@@ -136,6 +137,7 @@ func problem_diverge():
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
 func solution_diverge():
+	print("IM TRYING")
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(0, -400 * (solution_diverges+1))
 	child.position = position_offset
@@ -209,3 +211,10 @@ func _on_problem_delete_pressed() -> void:
 	$problem.visible = false
 	if $solution.visible == false:
 		queue_free()
+
+func export()-> String:
+	var data = "[s]" + $solution.text + " [p]" + $problem.text + "\n"
+	for child in get_children():
+		pass
+	return data
+	
