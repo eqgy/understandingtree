@@ -81,8 +81,7 @@ func problem_counterarg():
 		var count = 0
 		var par = self
 		var first_node = self
-		while par:
-			first_node = par
+		while (! "problems" in par):
 			par = par.get_parent()
 		for c in first_node.get_children():
 			if "problems" in c:
