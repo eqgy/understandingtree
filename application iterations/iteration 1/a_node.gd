@@ -9,6 +9,9 @@ var stop = 0
 var too = "A NODE"
 var has_line = false
 
+var sol_counterarg = 0
+var prob_counterarg = 0
+
 var prob_diverges = 0
 var solution_diverges = 0
 
@@ -55,18 +58,74 @@ func add_line():
 				add_child(line)
 			has_line = true
 
+func add_line_counterarg():
+	var line = Line2D.new()
+	line.add_point(Vector2(0,0)) # Add a point at its initial position
+	var new_x = -position.x
+	var new_y = -position.y
+	var new_pos = Vector2(new_x, new_y)
+	line.add_point(new_pos)
+	line.z_index = -1
+	add_child(line)
+	
 func _process(delta):
 	if stop <= 30:
 		add_line()
 	
 
 func problem_counterarg():
-	problem_leaf.visible = true
-	solution_leaf.visible = true
+	var done = false
+	if !solution_leaf.visible:
+		solution_leaf.visible = true
+	else:
+		var count = 0
+		var par = self
+		var first_node = self
+		while par:
+			first_node = par
+			par = par.get_parent()
+		for c in first_node.get_children():
+			if "problems" in c:
+				count +=1
+				if !c.solution_leaf.visible:
+					c.solution_leaf.visible = true
+					done = true
+					break
+		if !done:
+			var child = load("res://a node.tscn").instantiate()
+			var position_offset = Vector2(300 + 300*count, 0)
+			child.position = position_offset
+			first_node.add_child(child)
+			child.add_line_counterarg()
+			child.solution_leaf.visible = true
+			child.problem_leaf.visible = false
 
 func solution_counterarg():
-	problem_leaf.visible = true
-	solution_leaf.visible = true
+	var done = false
+	if !problem_leaf.visible:
+		problem_leaf.visible = true
+	else:
+		var count = 0
+		var par = self
+		var first_node = self
+		while par:
+			first_node = par
+			par = par.get_parent()
+		for c in first_node.get_children():
+			if "problems" in c:
+				count +=1
+				if !c.problem_leaf.visible:
+					c.problem_leaf.visible = true
+					done = true
+					break
+		if !done:
+			var child = load("res://a node.tscn").instantiate()
+			var position_offset = Vector2(300+count * 300, 0)
+			child.position = position_offset
+			first_node.add_child(child)
+			child.add_line_counterarg()
+			child.solution_leaf.visible = false
+			child.problem_leaf.visible = true
 
 func _on_expand_pressed2(arg):
 	var child = load("res://a node.tscn").instantiate()
@@ -75,21 +134,34 @@ func _on_expand_pressed2(arg):
 		off_set_weight = problems
 	else:
 		off_set_weight = solutions
-	var position_offset = Vector2(400, arg * 100 + 200 * off_set_weight * arg) # 100 is the length of the button
+	var position_offset = Vector2(450, arg * 200) # 100 is the length of the button
 	child.position = position_offset
 	child.add_line()
-	if arg == 1: # If it is a problem, add the child to title2
-		problem_leaf.add_child(child)
-		problems += 1
-		child.get_node("solution").visible = false
+	if arg == 1: # If it is a problem , add the child to title2
+		if (problems != 0):
+			var expand_parent = self
+			for c in $problem.get_children():
+				if "problems" in c:
+					expand_parent = c
+			expand_parent._on_expand_pressed2(1)
+		else:
+			problem_leaf.add_child(child)
+			problems+= 1
+			child.get_node("solution").visible = false
 	else: # If it is a solution, add the child to title
-		solution_leaf.add_child(child)
-		solutions += 1
-		child.get_node("problem").visible = false
+		if (solutions != 0):
+			var expand_parent = self
+			for c in $problem.get_children():
+				if "problems" in c:
+					expand_parent = c
+			expand_parent._on_expand_pressed2(-1)
+		else:
+			solution_leaf.add_child(child)
+			solutions += 1
+			child.get_node("problem").visible = false
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
-	print(children)
 
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
@@ -138,6 +210,8 @@ func add_custom_line_edit_to_child(num):
 		
 		custom_line_edit.z_index = 10  # Ensure it is drawn above other elements
 		custom_line_edit2.z_index = 10  # Ensure it is drawn above other elements
+		
+		
 func _on_button_toggled(toggled_on):
 	pass
 
