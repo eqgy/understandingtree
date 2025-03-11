@@ -10,9 +10,11 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("enter"):
 		release_focus()
+		get_parent().text = text
 		visible = false
 	if Input.is_action_just_pressed("click") && cooldownrunning == false:
 		visible = false
+		get_parent().text = text
 		release_focus()
 
 func cooldown():
