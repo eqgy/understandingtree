@@ -151,7 +151,7 @@ func _on_expand_pressed2(arg):
 	else: # If it is a solution, add the child to title
 		if (solutions != 0):
 			var expand_parent = self
-			for c in $problem.get_children():
+			for c in $solution.get_children():
 				if "problems" in c:
 					expand_parent = c
 			expand_parent._on_expand_pressed2(-1)
