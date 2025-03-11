@@ -252,13 +252,11 @@ func _on_problem_delete_pressed() -> void:
 
 func export()-> String:
 	var data = "[s]" + $solution.text + " [p]" + $problem.text + "\n"
-	print(data)
+	
 	for child in get_children():
 		if (child.name == "problem") or (child.name == "solution"):
 			for c in child.get_children():
 				if c.name == "node":
 					#print("running export on child")
-					c.export()
-					
-			#child.c.export()
+					data = data + c.export()
 	return data

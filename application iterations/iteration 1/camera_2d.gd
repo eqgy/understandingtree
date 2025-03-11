@@ -2,7 +2,7 @@ extends Camera2D
 
 var move_direction: Vector2
 var speed = 4
-
+var zoomingfactor = 1
 var zoom_step = 1.1
 
 func _input(event):
@@ -20,7 +20,7 @@ func zoom_at_point(zoom_change, point):
 	var c1 # next camera position
 	var z0 = zoom # current zoom value
 	var z1 = z0 * zoom_change # next zoom value
-
+	zoomingfactor = zoom
 	c1 = c0 + (-0.5*v0 + point)*(z0 - z1)
 	zoom = z1
 	global_position = c1
