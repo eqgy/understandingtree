@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba1lnq4epkd03"]
+
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ly54k"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -99.0
+offset_top = -95.0
+offset_right = 1331.0
+offset_bottom = 838.0
+color = Color(0.0654113, 0.0632081, 0.0726516, 1)
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -234.0
+offset_right = 246.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ly54k")
+theme_override_font_sizes/font_size = 48
+text = "UNDERSTANDING TREE"
+horizontal_alignment = 1
