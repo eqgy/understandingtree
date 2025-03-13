@@ -8,12 +8,11 @@ var solutions = 0
 var stop = 0
 var too = "A NODE"
 var has_line = false
-
 var sol_counterarg = 0
 var prob_counterarg = 0
-
 var prob_diverges = 0
 var solution_diverges = 0
+var type = 0 #KEY: 0=orgin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
 
 @onready var parent
 signal problem_or_solution
@@ -33,7 +32,6 @@ func determine_type():
 	return is_expand
 
 func add_line():
-	var is_expand = determine_type()
 	if parent == null:
 		if stop <= 30:
 			stop += 1
@@ -41,7 +39,6 @@ func add_line():
 			if parent == null || parent is Node2D:
 				pass
 			else:
-				is_expand = true
 				parent = parent.get_parent()
 	if parent != null:
 		if has_line == false:
@@ -49,7 +46,7 @@ func add_line():
 				var line = Line2D.new()
 				line.add_point(Vector2(0,0)) # Add a point at its initial position
 				var new_x = -position.x
-				if is_expand:
+				if type == 1 || type == 2:
 					new_x = -(position.x-150) #If the branch is being expanded, ensure that the line is centered on the button
 				var new_y = -position.y
 				var new_pos = Vector2(new_x, new_y)
@@ -92,6 +89,7 @@ func problem_counterarg():
 					break
 		if !done:
 			var child = load("res://a node.tscn").instantiate()
+			child.type = 5
 			var position_offset = Vector2(300 + 300*count, 0)
 			child.position = position_offset
 			first_node.add_child(child)
@@ -119,6 +117,7 @@ func solution_counterarg():
 					break
 		if !done:
 			var child = load("res://a node.tscn").instantiate()
+			child.type = 5
 			var position_offset = Vector2(300+count * 300, 0)
 			child.position = position_offset
 			first_node.add_child(child)
@@ -147,6 +146,7 @@ func _on_expand_pressed2(arg):
 			problem_leaf.add_child(child)
 			problems+= 1
 			child.get_node("solution").visible = false
+			child.type = 1
 	else: # If it is a solution, add the child to title
 		if (solutions != 0):
 			var expand_parent = self
@@ -158,6 +158,7 @@ func _on_expand_pressed2(arg):
 			solution_leaf.add_child(child)
 			solutions += 1
 			child.get_node("problem").visible = false
+			child.type = 2
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
@@ -170,6 +171,7 @@ func problem_diverge():
 	add_child(child)
 	prob_diverges += 1
 	child.get_node("solution").visible = false
+	child.type = 3
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 
@@ -182,6 +184,7 @@ func solution_diverge():
 	add_child(child)
 	solution_diverges += 1
 	child.get_node("problem").visible = false
+	child.type = 4
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
@@ -218,34 +221,36 @@ func _on_button_toggled(toggled_on):
 
 func _on_solution_delete_pressed():
 	parent = get_parent()
-	var is_expand = determine_type()
-	if !("problems" in parent):
+	if type == 0:
 		print("this is the base node. You cannot delete it.")
 		return
-	if is_expand:
+	if type == 1 || type == 2:
+		parent = parent.get_parent()
 		parent.solutions -=1
-	else:
+	elif type ==3  || type == 4:
 		parent.solution_diverges -=1
 	for child in $solution.get_children():
 		child.queue_free()
-	$solution.visible = false
+	if $solution.visible:
+		$solution.visible = false
 	if $problem.visible == false:
 		queue_free()
 	
 
 func _on_problem_delete_pressed() -> void:
 	parent = get_parent()
-	var is_expand = determine_type()
-	if !("problems" in parent):
+	if type == 0:
 		print("this is the base node. You cannot delete it.")
 		return
-	if is_expand:
+	if type == 1 || type == 2:
+		parent = parent.get_parent()
 		parent.problems-=1
-	else:
+	elif type == 3 || type == 4:
 		parent.prob_diverges -=1
 	for child in $problem.get_children():
 		child.queue_free()
-	$problem.visible = false
+	if $problem.visible:
+		$problem.visible = false
 	if $solution.visible == false:
 		queue_free()
 
