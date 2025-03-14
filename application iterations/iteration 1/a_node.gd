@@ -15,6 +15,7 @@ var solution_diverges = 0
 var installationdata
 var type = 0 #KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
 var id #set by globalcount function, for export identification
+var has_counterarg = false
 
 @onready var parent
 signal problem_or_solution
@@ -80,55 +81,50 @@ func _process(delta):
 
 func problem_counterarg():
 	var done = false
+	var par = self
 	if !solution_leaf.visible:
 		solution_leaf.visible = true
 	else:
-		var count = 0
-		var par = self
-		var first_node = self
-		while (! "problems" in par):
-			par = par.get_parent()
-		for c in first_node.get_children():
-			if "problems" in c:
-				count +=1
-				if !c.solution_leaf.visible:
-					c.solution_leaf.visible = true
-					done = true
-					break
+		while (par.has_counterarg && !done):
+			for c in par.get_children():
+				if "problems" in c && c.type == 5:
+					par = c
+					if !c.solution_leaf.visible:
+						c.solution_leaf.visible = true
+						done = true
+						break
 		if !done:
+			par.has_counterarg = true
 			var child = load("res://a node.tscn").instantiate()
 			child.type = 5
-			var position_offset = Vector2(300 + 300*count, 0)
+			var position_offset = Vector2(300, 0)
 			child.position = position_offset
-			first_node.add_child(child)
+			par.add_child(child)
 			child.add_line_counterarg()
 			child.solution_leaf.visible = true
 			child.problem_leaf.visible = false
 
 func solution_counterarg():
+	var par = self
 	var done = false
 	if !problem_leaf.visible:
 		problem_leaf.visible = true
 	else:
-		var count = 0
-		var par = self
-		var first_node = self
-		while par:
-			first_node = par
-			par = par.get_parent()
-		for c in first_node.get_children():
-			if "problems" in c:
-				count +=1
-				if !c.problem_leaf.visible:
-					c.problem_leaf.visible = true
-					done = true
-					break
+		while (par.has_counterarg && !done):
+			for c in par.get_children():
+				if "problems" in c && c.type == 5:
+					par = c
+					if !c.problem_leaf.visible:
+						c.problem_leaf.visible = true
+						done = true
+						break
 		if !done:
+			par.has_counterarg = true
 			var child = load("res://a node.tscn").instantiate()
 			child.type = 5
-			var position_offset = Vector2(300+count * 300, 0)
+			var position_offset = Vector2(300, 0)
 			child.position = position_offset
-			first_node.add_child(child)
+			par.add_child(child)
 			child.add_line_counterarg()
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
