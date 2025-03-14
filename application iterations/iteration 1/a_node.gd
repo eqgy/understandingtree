@@ -276,7 +276,7 @@ func export()-> String:
 	var data = installationdata+ "[s]" + $solution.text + " [p]" + $problem.text + "\n"
 	
 	for child in get_children():
-		print("child" + child.name)
+		print("child " + child.name)
 		if (child.name == "problem") or (child.name == "solution"):
 			for c in child.get_children():
 				if c.name == "node":
