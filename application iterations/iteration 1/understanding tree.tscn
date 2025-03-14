@@ -20,14 +20,14 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect2" type="ColorRect" parent="Control"]
+[node name="ColorRect2" type="Panel" parent="Control"]
 z_index = -1
 layout_mode = 0
 offset_left = -991.0
 offset_top = -715.0
 offset_right = 1487.0
 offset_bottom = 711.0
-color = Color(0.130178, 0.128146, 0.158041, 1)
+theme = ExtResource("2_jsh6r")
 
 [node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
 texture_filter = 4

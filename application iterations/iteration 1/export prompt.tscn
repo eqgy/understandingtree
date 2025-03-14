@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://neem1u8tbw7y"]
+
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_2fger"]
+
+[node name="ExportPrompt" type="Node2D"]
+
+[node name="ColorRect" type="Panel" parent="."]
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.5
+offset_top = -112.0
+offset_right = 210.5
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2fger")
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -15.5
+offset_right = 152.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2fger")
+placeholder_text = "name of file"
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -81.0
+offset_right = 98.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2fger")
+theme_override_font_sizes/font_size = 24
+text = "export as?"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 343.5
+offset_top = 180.0
+offset_right = 407.5
+offset_bottom = 211.0
+theme = ExtResource("1_2fger")
+text = "okay"
