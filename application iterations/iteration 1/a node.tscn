@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=12 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 [ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksbwh"]
+size = Vector2(341, 259.5)
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -23,6 +26,13 @@ LineEdit/styles/read_only = null
 [node name="node" type="Node2D"]
 texture_filter = 3
 script = ExtResource("1_lkhld")
+
+[node name="CollisionDefiner" type="Area2D" parent="."]
+position = Vector2(89, -128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDefiner"]
+position = Vector2(57.5, 126.25)
+shape = SubResource("RectangleShape2D_ksbwh")
 
 [node name="solution" type="Button" parent="."]
 z_index = 2
@@ -101,6 +111,7 @@ text = "Delete"
 script = ExtResource("5_iskqk")
 
 [node name="LineEdit" type="LineEdit" parent="solution"]
+visible = false
 layout_mode = 0
 offset_left = 5.0
 offset_top = 12.0
@@ -188,6 +199,7 @@ text = "Delete
 script = ExtResource("5_iskqk")
 
 [node name="LineEdit" type="LineEdit" parent="problem"]
+visible = false
 layout_mode = 0
 offset_left = 4.0
 offset_top = 13.0

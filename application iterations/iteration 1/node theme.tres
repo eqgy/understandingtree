@@ -16,16 +16,16 @@ expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ers"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
 bg_color = Color(0.217201, 0.215881, 0.204473, 1)
 border_color = Color(0.849719, 0.767631, 0.87436, 0.509804)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbbqy"]
 bg_color = Color(0.215686, 0.215686, 0.203922, 1)
@@ -59,7 +59,7 @@ corner_radius_bottom_left = 4
 
 [resource]
 default_font = ExtResource("3_djc6l")
-Button/font_sizes/font_size = 12
+Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_c3wsk")
 Button/styles/hover = SubResource("StyleBoxFlat_olyi6")
 Button/styles/normal = SubResource("StyleBoxFlat_g4ers")
