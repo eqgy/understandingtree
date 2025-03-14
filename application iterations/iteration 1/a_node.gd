@@ -260,7 +260,7 @@ func _on_problem_delete_pressed() -> void:
 
 func export()-> String:
 	if id > 1:
-		if (type == 5):
+		if (type >= 3):
 			installationdata = str(get_parent().id)
 		else:
 			installationdata = str(get_parent().get_parent().id)
@@ -278,7 +278,10 @@ func export()-> String:
 				if c.name == "node":
 					print("running export on child")
 					data = data + c.export()
-		if (child.name == "node"):
-			print("running export on counter-arg child")
-			data = data + child.export()
+		for c in child.get_children():
+			if (child.name == "problem") or (child.name == "solution"):
+				for ch in child.get_children():
+					if c.name == "node":
+						print("running export on child")
+						data = data + c.export()
 	return data
