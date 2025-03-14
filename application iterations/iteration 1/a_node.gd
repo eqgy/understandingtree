@@ -12,14 +12,22 @@ var sol_counterarg = 0
 var prob_counterarg = 0
 var prob_diverges = 0
 var solution_diverges = 0
-var type = 0 #KEY: 0=orgin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
+var installationdata
+var type = 0 #KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
+var id #set by globalcount function, for export identification
 
 @onready var parent
 signal problem_or_solution
 
+func globalcount():
+	id = Globals.nodecount
+	print(id)
+	Globals.nodecount +=1
+
 func _ready():
 	connect("problem_or_solution", _on_expand_pressed2)
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
+	globalcount()
 
 func determine_type():
 	var is_expand = false
@@ -255,12 +263,26 @@ func _on_problem_delete_pressed() -> void:
 		queue_free()
 
 func export()-> String:
-	var data = "[s]" + $solution.text + " [p]" + $problem.text + "\n"
+	if id > 1:
+		if (type == 5):
+			installationdata = str(get_parent().id)
+		else:
+			installationdata = str(get_parent().get_parent().id)
+	else:
+		installationdata = str(0)
+	var i = str(id)
+	var t = str(type)
+	installationdata += " " + i + " " + t
+	var data = installationdata+ "[s]" + $solution.text + " [p]" + $problem.text + "\n"
 	
 	for child in get_children():
+		print("child" + child.name)
 		if (child.name == "problem") or (child.name == "solution"):
 			for c in child.get_children():
 				if c.name == "node":
-					#print("running export on child")
+					print("running export on child")
 					data = data + c.export()
+		if (child.name == "node"):
+			print("running export on counter-arg child")
+			data = data + child.export()
 	return data
