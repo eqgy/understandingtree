@@ -222,19 +222,22 @@ func _on_solution_delete_pressed():
 			parent.solutions -=1 
 		
 	elif type ==3:
-		parent.problem_diverges -=1
-		for c in parent.get_children():
-			if "problems" in c && c.type == 3:
-				c.global_position.y += -400
-			if "problems" in c && c.type ==4:
-				for c2 in c.get_children():
-					if c2.get_class() == "Line2D":
-						c2.queue_free()
-						break;
-				c.global_position.y += 400
-				c.add_line()
+		var go = true
+		if (!$problem.visible):
+			parent.problem_diverges -=1
+			for c in parent.get_children():
+				if c == self:
+					go = false
+				if go && "problems" in c && c.type == 3:
+					c.global_position.y += -400
+					for c2 in c.get_children():
+						if c2.get_class() == "Line2D":
+							c2.queue_free()
+							break;
+					c.global_position.y += 400
+					c.add_line()
 	elif type == 4:
-		parent.solution_diverges -=1
+		pass
 		
 	elif type ==5:
 		parent.has_counterarg = false;
