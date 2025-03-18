@@ -8,8 +8,6 @@ var solutions = 0
 var stop = 0
 var too = "A NODE"
 var has_line = false
-var sol_counterarg = 0
-var prob_counterarg = 0
 var prob_diverges = 0
 var solution_diverges = 0
 var installationdata
@@ -251,6 +249,8 @@ func _on_problem_delete_pressed() -> void:
 		parent.problems-=1
 	elif type == 3 || type == 4:
 		parent.prob_diverges -=1
+	elif type ==5:
+		parent.has_counterarg = false;
 	for child in $problem.get_children():
 		child.queue_free()
 	if $problem.visible:
