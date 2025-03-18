@@ -223,6 +223,7 @@ func _on_button_toggled(toggled_on):
 
 func _on_solution_delete_pressed():
 	parent = get_parent()
+	var line_edit
 	if type == 0:
 		print("this is the base node. You cannot delete it.")
 		return
@@ -231,16 +232,23 @@ func _on_solution_delete_pressed():
 		parent.solutions -=1
 	elif type ==3  || type == 4:
 		parent.solution_diverges -=1
+	elif type ==5:
+		parent.has_counterarg = false;
 	for child in $solution.get_children():
-		child.queue_free()
+		if (child.get_class() == "LineEdit"):
+			line_edit = child
+		else:
+			child.queue_free()
 	if $solution.visible:
 		$solution.visible = false
 	if $problem.visible == false:
+		line_edit.queue_free()
 		queue_free()
 	
 
 func _on_problem_delete_pressed() -> void:
 	parent = get_parent()
+	var line_edit
 	if type == 0:
 		print("this is the base node. You cannot delete it.")
 		return
@@ -252,10 +260,14 @@ func _on_problem_delete_pressed() -> void:
 	elif type ==5:
 		parent.has_counterarg = false;
 	for child in $problem.get_children():
-		child.queue_free()
+		if (child.get_class() == "LineEdit"):
+			line_edit = child
+		else:
+			child.queue_free()
 	if $problem.visible:
 		$problem.visible = false
 	if $solution.visible == false:
+		line_edit.queue_free()
 		queue_free()
 
 func export()-> String:

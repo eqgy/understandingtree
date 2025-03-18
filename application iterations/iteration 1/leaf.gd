@@ -14,7 +14,7 @@ func _input(event):
 			button_pressed = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta*10):
+func _process(delta):
 	if button_pressed == true:
 		text_retainer = text
 		text = ""
