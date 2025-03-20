@@ -206,7 +206,6 @@ func _on_button_toggled(toggled_on):
 func _on_solution_delete_pressed():
 	parent = get_parent() #Get the parent of the node
 	var line_edit #stores the line edit variable of a node
-	
 	if type == 0:
 		print("this is the base node. You cannot delete it.") 
 		return
@@ -220,25 +219,34 @@ func _on_solution_delete_pressed():
 		parent = parent.get_parent()
 		if (!$problem.visible):
 			parent.solutions -=1 
-		
-	elif type ==3:
-		var go = true
+	
+	elif type == 3:
 		if (!$problem.visible):
 			parent.problem_diverges -=1
 			for c in parent.get_children():
-				if c == self:
-					go = false
-				if go && "problems" in c && c.type == 3:
-					c.global_position.y += -400
-					for c2 in c.get_children():
-						if c2.get_class() == "Line2D":
-							c2.queue_free()
-							break;
-					c.global_position.y += 400
-					c.add_line()
-	elif type == 4:
-		pass
+				if "problems" in c && c.type == 3:
+					if global_position.y < c.global_position.y:
+						c.global_position.y += -400
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
 		
+	elif type == 4:
+		if (!$problem.visible):
+			parent.solution_diverges -=1
+			for c in parent.get_children():
+				if "problems" in c && c.type == 4:
+					if global_position.y > c.global_position.y:
+						c.global_position.y += 400
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
 	elif type ==5:
 		parent.has_counterarg = false;
 	for child in $solution.get_children():
@@ -268,9 +276,32 @@ func _on_problem_delete_pressed() -> void:
 		if (!$solution.visible):
 			parent.solutions-=1
 	elif type == 3:
-		pass
-	elif type ==4:
-		pass
+		if (!$solution.visible):
+			parent.prob_diverges -=1
+			for c in parent.get_children():
+				if "problems" in c && c.type == 3:
+					if global_position.y < c.global_position.y:
+						c.global_position.y += -400
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
+		
+	elif type == 4:
+		if (!$solution.visible):
+			parent.prob_diverges -=1
+			for c in parent.get_children():
+				if "problems" in c && c.type == 4:
+					if global_position.y > c.global_position.y:
+						c.global_position.y += 400
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
 	elif type ==5:
 		parent.has_counterarg = false;
 	for child in $problem.get_children():
