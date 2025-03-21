@@ -15,14 +15,18 @@ var type = 0 #KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= prob
 var id #set by globalcount function, for export identification
 var has_counterarg = false
 
-
 @onready var parent
 signal problem_or_solution
 
 func globalcount():
 	id = Globals.nodecount
-	print(id)
+	Globals.nodedictionary[1] = self
 	Globals.nodecount +=1
+	
+
+func import_sequence(p,s):
+	problem_leaf.text = p
+	solution_leaf.text = s
 
 func _ready():
 	connect("problem_or_solution", _on_expand_pressed2)
@@ -104,7 +108,7 @@ func solution_counterarg():
 			var position_offset = Vector2(300, 0)
 			child.position = position_offset
 			par.add_child(child)
-			child.add_line_counterarg()
+			child.add_line()
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
 
@@ -316,29 +320,26 @@ func _on_problem_delete_pressed() -> void:
 		queue_free()
 
 func export()-> String:
+	installationdata = "|"
 	if id > 1:
 		if (type >= 3):
-			installationdata = str(get_parent().id)
+			installationdata += str(get_parent().id)
 		else:
-			installationdata = str(get_parent().get_parent().id)
+			installationdata += str(get_parent().get_parent().id)
 	else:
-		installationdata = str(0)
+		installationdata += str(0)
 	var i = str(id)
 	var t = str(type)
 	installationdata += " " + i + " " + t
-	var data = installationdata+ "[s]" + $solution.text + " [p]" + $problem.text + "\n"
+	var data = installationdata+ "|" + $solution.text + "|" + $problem.text + "\n"
 	
-	for child in get_children():
-		print("child " + child.name)
-		if (child.name == "problem") or (child.name == "solution"):
-			for c in child.get_children():
-				if c.name == "node":
-					print("running export on child")
-					data = data + c.export()
-		for c in child.get_children():
-			if (child.name == "problem") or (child.name == "solution"):
-				for ch in child.get_children():
-					if c.name == "node":
-						print("running export on child")
-						data = data + c.export()
+	for c in problem_leaf.get_children():
+		if "too" in c:
+			data = data + c.export()
+	for c in solution_leaf.get_children():
+		if "too" in c:
+			data = data + c.export()
+	for c in get_children():
+		if "too" in c:
+			data = data + c.export()
 	return data

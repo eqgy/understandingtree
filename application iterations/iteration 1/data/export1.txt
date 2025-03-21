@@ -1,1 +1,4 @@
-0 1 0[s] [p]
+|0 1 0|climate change|
+|1 2 4|ali|
+|2 5 2|who??|
+|1 4 4|how|

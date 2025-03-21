@@ -9,6 +9,17 @@
 [node name="Node2D" type="Node2D"]
 texture_filter = 4
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FileDialog" type="FileDialog" parent="CanvasLayer"]
+title = "Open a File"
+size = Vector2i(322, 180)
+theme = ExtResource("2_jsh6r")
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+root_subfolder = "data"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 scale = Vector2(2, 2)
 zoom = Vector2(0.5, 0.5)
@@ -19,15 +30,18 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="Panel" parent="Control"]
 z_index = -1
 layout_mode = 0
-offset_left = -991.0
-offset_top = -715.0
-offset_right = 1487.0
-offset_bottom = 711.0
+offset_left = -11827.0
+offset_top = -6338.0
+offset_right = -8012.0
+offset_bottom = -1604.0
+scale = Vector2(6.53643, 2.95543)
 theme = ExtResource("2_jsh6r")
+metadata/_edit_lock_ = true
 
 [node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
 texture_filter = 4
@@ -36,7 +50,8 @@ texture_filter = 4
 texture_filter = 4
 script = ExtResource("2_eq62t")
 
-[node name="node1" parent="THE UNDERSTANDING TREE/the start" instance=ExtResource("2_7kbvo")]
+[node name="node" parent="THE UNDERSTANDING TREE/the start" instance=ExtResource("2_7kbvo")]
+metadata/_edit_lock_ = true
 
 [node name="export" type="Button" parent="THE UNDERSTANDING TREE/the start"]
 offset_left = -186.0
@@ -56,13 +71,5 @@ text = "import
 "
 script = ExtResource("5_jq0ef")
 
-[node name="FileDialog" type="FileDialog" parent="THE UNDERSTANDING TREE/the start/import"]
-title = "Open a File"
-size = Vector2i(255, 175)
-content_scale_factor = 0.8
-ok_button_text = "Open"
-file_mode = 0
-access = 2
-root_subfolder = "data"
-
+[connection signal="file_selected" from="CanvasLayer/FileDialog" to="THE UNDERSTANDING TREE/the start" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="THE UNDERSTANDING TREE/the start/export" to="THE UNDERSTANDING TREE/the start" method="_on_export_pressed"]

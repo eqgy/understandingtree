@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6kege0txwxbu"]
+
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_vr8x8"]
+
+[node name="Dialogbox" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 285.0
+offset_bottom = 185.0
+theme = ExtResource("1_vr8x8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="title" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_vr8x8")
+text = "TITLE"
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_vr8x8")
+horizontal_alignment = 1
+
+[node name="okay" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_vr8x8")
+text = "okay"
