@@ -17,7 +17,6 @@ var has_counterarg = false
 var dictionaryupdated = false
 
 @onready var parent
-signal problem_or_solution
 
 
 func globalcount():
@@ -31,7 +30,6 @@ func import_sequence(p,s):
 	solution_leaf.text = s
 
 func _ready():
-	connect("problem_or_solution", _on_expand_pressed2)
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
 	id = Globals.nodecount
 	Globals.nodedictionary[id] = self
@@ -122,47 +120,6 @@ func solution_counterarg():
 			return child
 	return null
 
-func _on_expand_pressed2(arg):
-	#Arg differs depending on if a solution or problem is being expanded. Arg = 1 if solution, Arg = -1 if problem
-	var child = load("res://a node.tscn").instantiate()
-	var off_set_weight
-	if arg == 1:
-		off_set_weight = problems
-	else:
-		off_set_weight = solutions
-	var position_offset = Vector2(450, arg * 200) #Arg will change the direction that the node spawns in
-	child.position = position_offset
-	child.add_line()
-	if arg == 1: # If it is a problem , add the child to title2
-		if (problems != 0):
-			var expand_parent = self
-			print("reoccurred")
-			for c in $problem.get_children():
-				if "problems" in c:
-					expand_parent = c
-			child = expand_parent._on_expand_pressed2(1)
-			
-		else:
-			problem_leaf.add_child(child)
-			problems+= 1
-			child.get_node("solution").visible = false
-			child.type = 1
-		return child
-	else: # If it is a solution, add the child to title
-		if (solutions != 0):
-			var expand_parent = self
-			print("reoccurred")
-			for c in $solution.get_children():
-				if "problems" in c:
-					expand_parent = c
-			child = expand_parent._on_expand_pressed2(-1)
-		else:
-			solution_leaf.add_child(child)
-			solutions += 1
-			child.get_node("problem").visible = false
-			child.type = 2
-		print("prereturn" + str(child))
-		return child
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(0, 400 * (prob_diverges+1)) #Diverge more if there were previous diverges
@@ -192,10 +149,51 @@ func solution_diverge():
 	return child
 
 func problem_expand(): #_on_expand_pressed2 signal
-	emit_signal("problem_or_solution", 1)
+		#Arg differs depending on if a solution or problem is being expanded. Arg = 1 if solution, Arg = -1 if problem
+	var child = load("res://a node.tscn").instantiate()
+	var off_set_weight
+	off_set_weight = problems
+	var position_offset = Vector2(450, 200) #Arg will change the direction that the node spawns in
+	child.position = position_offset
+	child.add_line()
+	if (problems != 0):
+		var expand_parent = self
+		print("reoccurred")
+		for c in $problem.get_children():
+			if "problems" in c:
+				expand_parent = c
+		child = expand_parent._on_expand_pressed2(1)
+			
+	else:
+		problem_leaf.add_child(child)
+		problems+= 1
+		child.get_node("solution").visible = false
+		child.type = 1
+	return child
 
 func solution_expand():
-	emit_signal("problem_or_solution", -1) # _on_expand_pressed2 signal
+	#Arg differs depending on if a solution or problem is being expanded. Arg = 1 if solution, Arg = -1 if problem
+	var child = load("res://a node.tscn").instantiate()
+	var off_set_weight
+	off_set_weight = solutions
+	var position_offset = Vector2(450, -200) #Arg will change the direction that the node spawns in
+	child.position = position_offset
+	child.add_line()
+	if (solutions != 0):
+		var expand_parent = self
+		print("reoccurred")
+		for c in $solution.get_children():
+			if "problems" in c:
+				expand_parent = c
+		child = expand_parent.solution_expand()
+	else:
+		solution_leaf.add_child(child)
+		solutions += 1
+		child.get_node("problem").visible = false
+		child.type = 2
+		print("prereturn" + str(child))
+	return child
+	
 
 # Helper function to add a CustomLineEdit to a child
 # Function to add a CustomLineEdit to the corresponding title parent
