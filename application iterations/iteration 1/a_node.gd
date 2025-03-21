@@ -86,6 +86,8 @@ func problem_counterarg():
 			child.add_line()
 			child.solution_leaf.visible = true
 			child.problem_leaf.visible = false
+			return child
+	return null
 
 func solution_counterarg():
 	var par = self
@@ -111,6 +113,8 @@ func solution_counterarg():
 			child.add_line()
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
+			return child
+	return null
 
 func _on_expand_pressed2(arg):
 	#Arg differs depending on if a solution or problem is being expanded. Arg = 1 if solution, Arg = -1 if problem
@@ -162,6 +166,7 @@ func problem_diverge():
 	child.type = 3
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2) 
+	return child
 
 func solution_diverge():
 	print("IM TRYING")
@@ -176,6 +181,7 @@ func solution_diverge():
 	
 	# Add a CustomLineEdit to the child
 	add_custom_line_edit_to_child(2) 
+	return child
 
 func problem_expand():
 	emit_signal("problem_or_solution", 1)

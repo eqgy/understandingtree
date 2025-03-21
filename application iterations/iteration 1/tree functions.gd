@@ -84,17 +84,22 @@ func _on_file_dialog_file_selected(path):
 		nodeid= int(content_array[0].substr(2,1))
 		nodetype = int(content_array[0].substr(4,1))
 		print(content_array[0])
-		child = load("res://a node.tscn").instantiate()
-		child.type = nodetype
-		print(nodeparent)
-		print(Globals.nodedictionary)
+
+		#child.type = nodetype
+
 		var par = Globals.nodedictionary[nodeparent]
-		par.add_child(child)
-		await child.ready
-		print("nodecount" + str(Globals.nodecount))
-		child.add_line()
-		child.solution_leaf.visible = true
-		child.problem_leaf.visible = true
+		var l = par.get_children()
+		if nodetype == 1:#KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
+			par.problem_expand()
+		if nodetype == 2:
+			par.solution_expand()
+		if nodetype == 3:
+			par.problem_diverge()
+		if nodetype == 4:
+			par.solution_diverge()
+		if nodetype == 5: #
+			par.problem_counterarg()
+		par.get_child(l + 1)
 		child.import_sequence(p,s)
 		content_array.remove_at(0)
 		content_array.remove_at(0)
