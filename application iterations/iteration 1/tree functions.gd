@@ -48,6 +48,8 @@ func _on_file_dialog_file_selected(path):
 		if !(child.name == ("export")) and !(child.name == ("import")):
 			globalpos = child.global_position
 			child.queue_free()
+			Globals.nodecount = 1
+			Globals.nodedictionary = {}
 	var file = FileAccess.open(path, FileAccess.READ)
 	var content = file.get_as_text()
 	#print(content)
@@ -83,23 +85,31 @@ func _on_file_dialog_file_selected(path):
 		nodeparent = int(content_array[0].substr(0,1))
 		nodeid= int(content_array[0].substr(2,1))
 		nodetype = int(content_array[0].substr(4,1))
-		print(content_array[0])
+
 
 		#child.type = nodetype
 
 		var par = Globals.nodedictionary[nodeparent]
-		var l = par.get_children()
+		var l = par.get_children().size()
 		if nodetype == 1:#KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
-			par.problem_expand()
-		if nodetype == 2:
-			par.solution_expand()
-		if nodetype == 3:
-			par.problem_diverge()
-		if nodetype == 4:
-			par.solution_diverge()
-		if nodetype == 5: #
-			par.problem_counterarg()
-		par.get_child(l + 1)
+			child = par.problem_expand()
+			child.problem_leaf.visible = true
+		elif nodetype == 2:
+			child = par.solution_expand()
+			print("post return" + str(child))
+			child.solution_leaf.visible = true
+		elif nodetype == 3:
+			child = par.problem_diverge()
+			child.solution_leaf.visible = true
+		elif nodetype == 4:
+			child = par.solution_diverge()
+			child.problem_leaf.visible = true
+		elif nodetype == 5: #
+			child = par.problem_counterarg()
+			child.solution_leaf.visible = true
+		await get_tree().process_frame
+		print(nodetype)
+		print("child" + str(child))
 		child.import_sequence(p,s)
 		content_array.remove_at(0)
 		content_array.remove_at(0)

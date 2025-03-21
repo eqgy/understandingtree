@@ -14,9 +14,11 @@ var installationdata
 var type = 0 #KEY: 0=origin node, 1= problem expand, 2= solution expand, 3= problem diverge, 4 = solution diverge, 5 = counter argument
 var id #set by globalcount function, for export identification
 var has_counterarg = false
+var dictionaryupdated = false
 
 @onready var parent
 signal problem_or_solution
+
 
 func globalcount():
 	id = Globals.nodecount
@@ -31,7 +33,11 @@ func import_sequence(p,s):
 func _ready():
 	connect("problem_or_solution", _on_expand_pressed2)
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
-	globalcount()
+	id = Globals.nodecount
+	Globals.nodedictionary[id] = self
+	Globals.nodecount +=1
+	
+	
 
 func add_line():
 	if parent == null:
@@ -130,31 +136,33 @@ func _on_expand_pressed2(arg):
 	if arg == 1: # If it is a problem , add the child to title2
 		if (problems != 0):
 			var expand_parent = self
+			print("reoccurred")
 			for c in $problem.get_children():
 				if "problems" in c:
 					expand_parent = c
-			expand_parent._on_expand_pressed2(1)
+			child = expand_parent._on_expand_pressed2(1)
+			
 		else:
 			problem_leaf.add_child(child)
 			problems+= 1
 			child.get_node("solution").visible = false
 			child.type = 1
+		return child
 	else: # If it is a solution, add the child to title
 		if (solutions != 0):
 			var expand_parent = self
+			print("reoccurred")
 			for c in $solution.get_children():
 				if "problems" in c:
 					expand_parent = c
-			expand_parent._on_expand_pressed2(-1)
+			child = expand_parent._on_expand_pressed2(-1)
 		else:
 			solution_leaf.add_child(child)
 			solutions += 1
 			child.get_node("problem").visible = false
 			child.type = 2
-	
-	# Add a CustomLineEdit to the child
-	add_custom_line_edit_to_child(2) 
-
+		print("prereturn" + str(child))
+		return child
 func problem_diverge():
 	var child = load("res://a node.tscn").instantiate()
 	var position_offset = Vector2(0, 400 * (prob_diverges+1)) #Diverge more if there were previous diverges
@@ -183,11 +191,11 @@ func solution_diverge():
 	add_custom_line_edit_to_child(2) 
 	return child
 
-func problem_expand():
+func problem_expand(): #_on_expand_pressed2 signal
 	emit_signal("problem_or_solution", 1)
 
 func solution_expand():
-	emit_signal("problem_or_solution", -1)
+	emit_signal("problem_or_solution", -1) # _on_expand_pressed2 signal
 
 # Helper function to add a CustomLineEdit to a child
 # Function to add a CustomLineEdit to the corresponding title parent
