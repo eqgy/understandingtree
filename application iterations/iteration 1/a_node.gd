@@ -34,15 +34,62 @@ func _ready():
 	id = Globals.nodecount
 	Globals.nodedictionary[id] = self
 	Globals.nodecount +=1
-	
+
+func adjust_diverge(parent):
+	if (parent.type == 3):
+		var base_node = parent.get_parent()
+		for c in base_node.get_children():
+			if c.get_class() == "Node2D":
+				if c.type == 3:
+					if parent.global_position.y <= c.global_position.y:
+						c.global_position.y += 200
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
+	elif (parent.type ==4):
+		var base_node = parent.get_parent()
+		for c in base_node.get_children():
+			if c.get_class() == "Node2D":
+				if c.type == 4:
+					if parent.global_position.y >= c.global_position.y:
+						c.global_position.y += -100
+						for c2 in c.get_children():
+							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
+								c2.queue_free()
+								continue;
+						c.has_line = false;
+						c.add_line()
+
+func search_for_divergent(obj):
+	if obj.get_class() != "Node2D":
+		obj = obj.get_parent()
+	if obj.type == 3:
+		return obj
+	elif obj.type == 4:
+		return obj
+	elif obj.type == 0:
+		return obj
+	else:
+		var returned = search_for_divergent(obj.get_parent())
+		if returned.get_class() == "Node2D" && returned.type != 0:
+			return returned
+		return null 
+		
 func check_collisions():
 	for c in get_children():
 		if c.get_class() == "Area2D":
 			if c.has_overlapping_areas():
-				print("overlap found")
-				print(type)
-				#placeholder, once collisions work this function will be written
-	
+				#check for a divergent node
+				print("collision")
+				var diverge = search_for_divergent(self)
+				if diverge == null:
+					return
+				else:
+					adjust_diverge(diverge)
+				
 func add_collision(posx, posy):
 	#creating shape
 	var angle = 4.712 + atan(posy/posx)
@@ -86,7 +133,8 @@ func add_line():
 				line.add_point(new_pos)
 				line.z_index = -1
 				add_child(line)
-				add_collision(new_x,new_y)
+				if type == 1 || type ==2:
+					add_collision(new_x,new_y)
 			has_line = true
 			
 func _process(delta):
@@ -328,7 +376,7 @@ func _on_problem_delete_pressed() -> void:
 					if global_position.y < c.global_position.y:
 						c.global_position.y += -400
 						for c2 in c.get_children():
-							if c2.get_class() == "Line2D":
+							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
 								c2.queue_free()
 								continue;
 						c.has_line = false;
@@ -342,7 +390,7 @@ func _on_problem_delete_pressed() -> void:
 					if global_position.y > c.global_position.y:
 						c.global_position.y += 400
 						for c2 in c.get_children():
-							if c2.get_class() == "Line2D":
+							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
 								c2.queue_free()
 								continue;
 						c.has_line = false;
