@@ -35,8 +35,34 @@ func _ready():
 	Globals.nodedictionary[id] = self
 	Globals.nodecount +=1
 	
+func check_collisions():
+	for c in get_children():
+		if c.get_class() == "Area2D":
+			if c.has_overlapping_areas():
+				print("overlap found")
+				print(type)
+				#placeholder, once collisions work this function will be written
 	
+func add_collision(posx, posy):
+	#creating shape
+	var angle = 4.712 + atan(posy/posx)
+	var length = pow((pow(posy,2) + pow(posx,2)), 0.5)
+	var shape = RectangleShape2D.new()
+	shape.size = Vector2(15,length)
+	
+	var collision_shape = CollisionShape2D.new()
+	collision_shape.shape = shape
+	collision_shape.rotation = angle
+	var area = Area2D.new()
+	area.set_collision_mask_value(1, true)
+	area.add_child(collision_shape)
+	
+	#repositioning
+	area.position.x = posx/2
+	area.position.y = posy/2
+	add_child(area)
 
+	
 func add_line():
 	if parent == null:
 		if stop <= 30:
@@ -46,6 +72,7 @@ func add_line():
 				pass
 			else:
 				parent = parent.get_parent()
+				
 	if parent != null:
 		if has_line == false:
 			if parent is Node2D && "too" in parent:
@@ -59,9 +86,11 @@ func add_line():
 				line.add_point(new_pos)
 				line.z_index = -1
 				add_child(line)
+				add_collision(new_x,new_y)
 			has_line = true
 			
 func _process(delta):
+	check_collisions()
 	if stop <= 30:
 		add_line()
 	

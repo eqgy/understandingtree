@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=11 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
@@ -6,9 +6,6 @@
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 [ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksbwh"]
-size = Vector2(341, 259.5)
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -27,12 +24,10 @@ LineEdit/styles/read_only = null
 texture_filter = 3
 script = ExtResource("1_lkhld")
 
-[node name="CollisionDefiner" type="Area2D" parent="."]
-position = Vector2(89, -128)
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionDefiner"]
-position = Vector2(57.5, 126.25)
-shape = SubResource("RectangleShape2D_ksbwh")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(99, -114, 121, -114, 191, -118, 225, -110, 230, -95, 208, -86, 182, -83, 153, -79, 149, -76, 149, -72, 32, -10, 31, 5, 165, 67, 234, 73, 244, 99, 199, 107, 156, 112, 108, 109, 98, 81, 141, 68, 20, 16, 20, -11, 45, -29, 127, -74)
 
 [node name="solution" type="Button" parent="."]
 z_index = 2
