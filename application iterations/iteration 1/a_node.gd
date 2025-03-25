@@ -44,14 +44,19 @@ func _ready():
 	Globals.nodedictionary[id] = self
 	Globals.nodecount +=1
 
-func adjust_diverge(parent):
+func adjust_diverge(parent, adjust):
+	var multiple
+	if adjust == "yes":
+		multiple = 1
+	else:
+		multiple = -1
 	if (parent.type == 3):
 		var base_node = parent.get_parent()
 		for c in base_node.get_children():
 			if c.get_class() == "Node2D":
 				if c.type == 3:
 					if parent.global_position.y <= c.global_position.y:
-						c.global_position.y += 200
+						c.global_position.y += 150 * multiple
 						for c2 in c.get_children():
 							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
 								c2.queue_free()
@@ -65,7 +70,7 @@ func adjust_diverge(parent):
 			if c.get_class() == "Node2D":
 				if c.type == 4:
 					if parent.global_position.y >= c.global_position.y:
-						c.global_position.y += -100
+						c.global_position.y += 150 * multiple
 						for c2 in c.get_children():
 							if c2.get_class() == "Line2D" || c2.get_class() == "Area2D":
 								c2.queue_free()
@@ -92,12 +97,23 @@ func check_collisions():
 	for c in get_children():
 		if c.get_class() == "Area2D":
 			if c.has_overlapping_areas():
+				var adjust = "invalid"
 				#check for a divergent node
+				var collisions = c.get_overlapping_areas()
+				var parent = c.get_parent()
+				if parent.type == 2 || parent.type == 4:
+					adjust = "yes"
+				elif parent.type == 1 || parent.type ==3:
+					adjust = "no"
+				print(parent.type)
+				print(adjust)
+				if adjust == "invalid":
+					return;
 				var diverge = search_for_divergent(self)
 				if diverge == null:
 					return
 				else:
-					adjust_diverge(diverge)
+					adjust_diverge(diverge, adjust)
 				
 func add_collision(posx, posy):
 	#creating shape
