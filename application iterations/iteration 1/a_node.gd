@@ -67,7 +67,6 @@ func adjust_diverge(parent):
 func search_for_divergent(obj):
 	if obj.get_class() != "Node2D":
 		obj = obj.get_parent()
-	print(obj.type)
 	if obj.type == 3:
 		return obj
 	elif obj.type == 4:
@@ -240,7 +239,7 @@ func problem_expand(): #_on_expand_pressed2 signal
 		for c in $problem.get_children():
 			if "problems" in c:
 				expand_parent = c
-		child = expand_parent._on_expand_pressed2(1)
+		child = expand_parent.problem_expand()
 			
 	else:
 		problem_leaf.add_child(child)
