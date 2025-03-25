@@ -28,6 +28,15 @@ func globalcount():
 func import_sequence(p,s):
 	problem_leaf.text = p
 	solution_leaf.text = s
+	if p == "":
+		problem_leaf.visible = true
+	else: 
+		problem_leaf.visible = true
+		
+	if s == "":
+		solution_leaf.visible = true
+	else: 
+		solution_leaf.visible = true
 
 func _ready():
 	add_custom_line_edit_to_child(2)  # <-- Highlighted change
