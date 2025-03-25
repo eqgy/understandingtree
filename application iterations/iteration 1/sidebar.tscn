@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bar48iu70ca17"]
+[gd_scene load_steps=6 format=3 uid="uid://c1rbava0y5b7y"]
 
 [ext_resource type="Script" path="res://sidebar.gd" id="1_bebx6"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_unxxk"]
@@ -9,6 +9,7 @@
 bg_color = Color(0.41622, 0.428377, 0.410215, 1)
 border_width_left = 1
 border_width_top = 1
+border_width_right = 2
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
@@ -26,7 +27,7 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
-[node name="Node2D" type="PanelContainer"]
+[node name="Node2D2" type="PanelContainer"]
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 135.0

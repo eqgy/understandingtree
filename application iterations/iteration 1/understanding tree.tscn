@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://tree functions.gd" id="2_eq62t"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="2_jsh6r"]
 [ext_resource type="Script" path="res://import.gd" id="5_jq0ef"]
-[ext_resource type="PackedScene" uid="uid://bar48iu70ca17" path="res://sidebar.tscn" id="6_e72sf"]
+[ext_resource type="PackedScene" uid="uid://c1rbava0y5b7y" path="res://sidebar.tscn" id="6_e72sf"]
 
 [node name="Node2D" type="Node2D"]
 texture_filter = 4

@@ -293,7 +293,6 @@ func solution_expand():
 		solutions += 1
 		child.get_node("problem").visible = false
 		child.type = 2
-		print("prereturn" + str(child))
 	return child
 	
 

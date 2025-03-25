@@ -57,7 +57,7 @@ func _on_file_dialog_file_selected(path):
 	#first node
 	content = content.strip_escapes()
 	var content_array = content.split("|")
-
+	
 	var p = content_array[2]
 	var s = content_array[3]
 
@@ -73,18 +73,40 @@ func _on_file_dialog_file_selected(path):
 	child.solution_leaf.visible = true
 	child.problem_leaf.visible = true
 	child.import_sequence(p,s)
+	
 	content_array.remove_at(0)
 	content_array.remove_at(0)
 	content_array.remove_at(0)
 	content_array.remove_at(0)
 	
-	#subsequent nodes
+
+	var dic = {}
 	while(!(content_array.is_empty())):
-		p = content_array[1]
-		s = content_array[2]
-		nodeparent = int(content_array[0].substr(0,1))
-		nodeid= int(content_array[0].substr(2,1))
-		nodetype = int(content_array[0].substr(4,1))
+		var narray = content_array[0].split(" ")
+		var nid = int(narray[1])
+		dic[nid] = [content_array[0],content_array[1],content_array[2]]
+
+		content_array.remove_at(0)
+		content_array.remove_at(0)
+		content_array.remove_at(0)
+
+	
+	
+	#subsequent nodes
+	var count = 2
+	while(!(dic.is_empty())):
+
+		var n = dic[count]
+		p = n[1]
+		s = n[2]
+
+		
+		var narray = n[0].split(" ")
+
+		nodeparent = int(narray[0])
+		nodeid= int(narray[1])
+		nodetype = int(narray[2])
+		count += 1
 
 
 		#child.type = nodetype
@@ -96,7 +118,7 @@ func _on_file_dialog_file_selected(path):
 			child.problem_leaf.visible = true
 		elif nodetype == 2:
 			child = par.solution_expand()
-			print("post return" + str(child))
+
 			child.solution_leaf.visible = true
 		elif nodetype == 3:
 			child = par.problem_diverge()
@@ -108,9 +130,8 @@ func _on_file_dialog_file_selected(path):
 			child = par.problem_counterarg()
 			child.solution_leaf.visible = true
 		await get_tree().process_frame
-		print(nodetype)
-		print("child" + str(child))
+
+
 		child.import_sequence(p,s)
-		content_array.remove_at(0)
-		content_array.remove_at(0)
-		content_array.remove_at(0)
+		print("count being erased" + str(count-1))
+		dic.erase(count-1)
