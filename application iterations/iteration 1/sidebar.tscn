@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://bar48iu70ca17"]
+
+[ext_resource type="Script" path="res://sidebar.gd" id="1_bebx6"]
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_unxxk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6c07"]
+bg_color = Color(0.602024, 1, 0.883883, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umero"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="PanelContainer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 135.0
+grow_vertical = 2
+script = ExtResource("1_bebx6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(130, 300)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6c07")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_unxxk")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Understanding
+Tree"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_unxxk")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 13
+text = "Description:
+"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 13
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_umero")
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2/Panel"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = -6.0
+offset_right = 28.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 23
+text = " >"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Panel/Button" to="." method="_on_button_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1406qdf4gdrf"]
+[gd_scene load_steps=7 format=3 uid="uid://b1406qdf4gdrf"]
 
 [ext_resource type="Script" path="res://camera_2d.gd" id="1_8jth8"]
 [ext_resource type="PackedScene" uid="uid://biijdxa5vbai2" path="res://a node.tscn" id="2_7kbvo"]
 [ext_resource type="Script" path="res://tree functions.gd" id="2_eq62t"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="2_jsh6r"]
 [ext_resource type="Script" path="res://import.gd" id="5_jq0ef"]
+[ext_resource type="PackedScene" uid="uid://bar48iu70ca17" path="res://sidebar.tscn" id="6_e72sf"]
 
 [node name="Node2D" type="Node2D"]
 texture_filter = 4
@@ -70,6 +71,10 @@ theme = ExtResource("2_jsh6r")
 text = "import
 "
 script = ExtResource("5_jq0ef")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Node2D" parent="CanvasLayer2" instance=ExtResource("6_e72sf")]
 
 [connection signal="file_selected" from="CanvasLayer/FileDialog" to="THE UNDERSTANDING TREE/the start" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="THE UNDERSTANDING TREE/the start/export" to="THE UNDERSTANDING TREE/the start" method="_on_export_pressed"]
