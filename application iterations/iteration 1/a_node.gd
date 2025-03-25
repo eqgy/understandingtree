@@ -49,6 +49,7 @@ func adjust_diverge(parent):
 								continue;
 						c.has_line = false;
 						c.add_line()
+
 	elif (parent.type ==4):
 		var base_node = parent.get_parent()
 		for c in base_node.get_children():
@@ -66,6 +67,7 @@ func adjust_diverge(parent):
 func search_for_divergent(obj):
 	if obj.get_class() != "Node2D":
 		obj = obj.get_parent()
+	print(obj.type)
 	if obj.type == 3:
 		return obj
 	elif obj.type == 4:
@@ -74,16 +76,15 @@ func search_for_divergent(obj):
 		return obj
 	else:
 		var returned = search_for_divergent(obj.get_parent())
-		if returned.get_class() == "Node2D" && returned.type != 0:
-			return returned
-		return null 
+		if returned == null || returned.type == 0 ||  returned.get_class() != "Node2D":
+			return null
+		return returned
 		
 func check_collisions():
 	for c in get_children():
 		if c.get_class() == "Area2D":
 			if c.has_overlapping_areas():
 				#check for a divergent node
-				print("collision")
 				var diverge = search_for_divergent(self)
 				if diverge == null:
 					return
