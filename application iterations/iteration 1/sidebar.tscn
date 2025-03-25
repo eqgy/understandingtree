@@ -1,10 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bar48iu70ca17"]
+[gd_scene load_steps=5 format=3 uid="uid://c1rbava0y5b7y"]
 
 [ext_resource type="Script" path="res://sidebar.gd" id="1_bebx6"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_unxxk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6c07"]
-bg_color = Color(0.602024, 1, 0.883883, 1)
+bg_color = Color(0.41622, 0.428377, 0.410215, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
