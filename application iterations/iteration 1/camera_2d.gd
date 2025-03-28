@@ -2,8 +2,9 @@ extends Camera2D
 
 var move_direction: Vector2
 var speed = 4
-var zoomingfactor = 1
+var zoomingfactor = Vector2(1,1)
 var zoom_step = 1.1
+var go = false
 
 func _input(event):
 	if event is InputEventMouse:
@@ -11,9 +12,21 @@ func _input(event):
 			var mouse_position = event.position
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 				zoom_at_point(zoom_step,mouse_position)
-			else : if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_at_point(1/zoom_step,mouse_position)
-					
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				go = true
+		
+		if (event is InputEventMouseButton && event.is_pressed() == false):
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				go = false
+
+			
+	if event is InputEventMouseMotion:
+		if go:
+			var mult = Vector2(1/zoomingfactor[0], 1/zoomingfactor[1])
+			position -= event.screen_relative * (mult) #move less if you are zoomed in
+				
 func zoom_at_point(zoom_change, point):
 	var c0 = global_position # camera position
 	var v0 = get_viewport().size # vieport size

@@ -29,14 +29,12 @@ func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
-		problem_leaf.visible = true
+		problem_leaf.visible = false
 	else: 
-		print("here")
 		problem_leaf.visible = true
 	if s == "":
-		solution_leaf.visible = true
+		solution_leaf.visible = false
 	else:
-		print("here")
 		solution_leaf.visible = true
 
 func _ready():

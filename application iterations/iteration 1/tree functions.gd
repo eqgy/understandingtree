@@ -72,7 +72,7 @@ func _on_file_dialog_file_selected(path):
 	child.add_line()
 	child.solution_leaf.visible = true
 	child.problem_leaf.visible = true
-	child.import_sequence(p,s)
+	#child.import_sequence(p,s)
 	
 	content_array.remove_at(0)
 	content_array.remove_at(0)
