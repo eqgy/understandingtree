@@ -25,17 +25,18 @@ func globalcount():
 	Globals.nodecount +=1
 	
 
-func import_sequence(p,s):
+func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
 		problem_leaf.visible = true
 	else: 
+		print("here")
 		problem_leaf.visible = true
-		
 	if s == "":
 		solution_leaf.visible = true
-	else: 
+	else:
+		print("here")
 		solution_leaf.visible = true
 
 func _ready():
@@ -105,8 +106,6 @@ func check_collisions():
 					adjust = "yes"
 				elif parent.type == 1 || parent.type ==3:
 					adjust = "no"
-				print(parent.type)
-				print(adjust)
 				if adjust == "invalid":
 					return;
 				var diverge = search_for_divergent(self)
@@ -144,7 +143,6 @@ func add_line():
 				pass
 			else:
 				parent = parent.get_parent()
-				
 	if parent != null:
 		if has_line == false:
 			if parent is Node2D && "too" in parent:
@@ -323,7 +321,6 @@ func _on_button_toggled(toggled_on):
 
 func _on_solution_delete_pressed():
 	parent = get_parent() #Get the parent of the node
-	var line_edit #stores the line edit variable of a node
 	if type == 0:
 		print("this is the base node. You cannot delete it.") 
 		return
@@ -368,14 +365,13 @@ func _on_solution_delete_pressed():
 	elif type ==5:
 		parent.has_counterarg = false;
 	for child in $solution.get_children():
-		if (child.get_class() == "LineEdit"):
-			line_edit = child
-		else:
+		if (child.get_class() == "Node2D"):
 			child.queue_free()
 	if $solution.visible:
 		$solution.visible = false
 	if $problem.visible == false:
-		line_edit.queue_free()
+		for child in $solution.get_children():
+			child.queue_free()
 		queue_free()
 	
 
@@ -422,15 +418,16 @@ func _on_problem_delete_pressed() -> void:
 						c.add_line()
 	elif type ==5:
 		parent.has_counterarg = false;
+			
 	for child in $problem.get_children():
-		if (child.get_class() == "LineEdit"):
-			line_edit = child
-		else:
+		if (child.get_class() == "Node2D"):
 			child.queue_free()
+
 	if $problem.visible:
 		$problem.visible = false
 	if $solution.visible == false:
-		line_edit.queue_free()
+		for child in $problem.get_children():
+			child.queue_free()
 		queue_free()
 
 func export()-> String:
