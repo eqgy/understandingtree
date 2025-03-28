@@ -1,24 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1rbava0y5b7y"]
+[gd_scene load_steps=6 format=3 uid="uid://c1rbava0y5b7y"]
 
 [ext_resource type="Script" path="res://sidebar.gd" id="1_bebx6"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_unxxk"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bj12d"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6c07"]
 bg_color = Color(0.41622, 0.428377, 0.410215, 1)
-border_width_left = 2
-border_width_top = 2
+border_width_left = 1
+border_width_top = 1
 border_width_right = 2
-border_width_bottom = 2
+border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umero"]
 bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_blend = true
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
-[node name="Node2D" type="PanelContainer"]
+[node name="Node2D2" type="PanelContainer"]
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 135.0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bj12d")
 script = ExtResource("1_bebx6")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

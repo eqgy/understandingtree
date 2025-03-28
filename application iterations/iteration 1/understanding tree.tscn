@@ -75,6 +75,7 @@ script = ExtResource("5_jq0ef")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Node2D" parent="CanvasLayer2" instance=ExtResource("6_e72sf")]
+offset_right = 150.0
 
 [connection signal="file_selected" from="CanvasLayer/FileDialog" to="THE UNDERSTANDING TREE/the start" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="THE UNDERSTANDING TREE/the start/export" to="THE UNDERSTANDING TREE/the start" method="_on_export_pressed"]
