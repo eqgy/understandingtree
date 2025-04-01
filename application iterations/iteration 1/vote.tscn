@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqy0v20iux2nn"]
+
+[ext_resource type="Script" path="res://vote.gd" id="1_wj1wp"]
+
+[sub_resource type="GDScript" id="GDScript_lll5m"]
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wj1wp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="VSlider1" type="VSlider" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+script = SubResource("GDScript_lll5m")
+
+[node name="VSlider2" type="VSlider" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+script = SubResource("GDScript_lll5m")
+
+[connection signal="changed" from="MarginContainer/HBoxContainer/VSlider1" to="MarginContainer/HBoxContainer/VSlider1" method="_on_changed"]
+[connection signal="drag_ended" from="MarginContainer/HBoxContainer/VSlider1" to="MarginContainer/HBoxContainer/VSlider1" method="_on_drag_ended"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VSlider1" to="." method="_on_v_slider_1_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VSlider1" to="MarginContainer/HBoxContainer/VSlider1" method="_on_value_changed"]
+[connection signal="drag_ended" from="MarginContainer/HBoxContainer/VSlider2" to="MarginContainer/HBoxContainer/VSlider2" method="_on_drag_ended"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VSlider2" to="." method="_on_v_slider_2_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VSlider2" to="MarginContainer/HBoxContainer/VSlider1" method="_on_v_slider_2_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VSlider2" to="MarginContainer/HBoxContainer/VSlider2" method="_on_value_changed"]
