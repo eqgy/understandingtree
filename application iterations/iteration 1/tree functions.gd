@@ -33,9 +33,14 @@ func save_to_file(content):
 	file.close()
 
 func _on_export_pressed():
-	data = $node.export()
-	save_to_file(data)
-	pass # Replace with function body.
+	var stop = false
+	for child in get_children():
+		if !stop && "problems" in child:
+			data = child.export()
+			stop = true
+			break;
+	if data != "":
+		save_to_file(data)
 
 
 func _on_import_pressed():
