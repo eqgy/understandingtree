@@ -233,7 +233,7 @@ func problem_counterarg():
 			child.solution_leaf.visible = true
 			child.problem_leaf.visible = false
 			return child
-	return null
+	return self
 
 func solution_counterarg():
 	"""solution_counterarg() is called whenever the "counter" button on a solution leaf is pressed. If
@@ -266,7 +266,7 @@ func solution_counterarg():
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
 			return child
-	return null
+	return self
 
 func problem_diverge():
 	"""problem_diverge() is called whenever the "diverge" button on a problem leaf is pressed. It
