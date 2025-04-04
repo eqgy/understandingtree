@@ -6,10 +6,10 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bj12d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6c07"]
-bg_color = Color(0.41622, 0.428377, 0.410215, 1)
+content_margin_left = 2.0
+bg_color = Color(0.126336, 0.131603, 0.123731, 1)
 border_width_left = 1
 border_width_top = 1
-border_width_right = 2
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
@@ -58,7 +58,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_unxxk")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Understanding
 Tree"
 horizontal_alignment = 1
@@ -66,7 +65,6 @@ horizontal_alignment = 1
 [node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_unxxk")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 13
 text = "Description:
 "
@@ -81,6 +79,21 @@ theme_override_constants/margin_right = 5
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 13
+
+[node name="Buttons" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme = ExtResource("1_unxxk")
+theme_override_font_sizes/font_size = 16
+text = "ai suggestions"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -110,4 +123,5 @@ theme_override_font_sizes/font_size = 23
 text = " >"
 horizontal_alignment = 1
 
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Buttons/Button" to="." method="_on_ai_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Panel/Button" to="." method="_on_button_pressed"]
