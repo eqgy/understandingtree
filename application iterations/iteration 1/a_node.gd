@@ -29,11 +29,11 @@ func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
-		problem_leaf.visible = false
+		problem_leaf.visible = true
 	else: 
 		problem_leaf.visible = true
 	if s == "":
-		solution_leaf.visible = false
+		solution_leaf.visible = true
 	else:
 		solution_leaf.visible = true
 
@@ -96,6 +96,8 @@ func check_collisions():
 	for c in get_children():
 		if c.get_class() == "Area2D":
 			if c.has_overlapping_areas():
+				print("collided!!")
+				
 				var adjust = "invalid"
 				#check for a divergent node
 				var collisions = c.get_overlapping_areas()
