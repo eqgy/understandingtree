@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://import.gd" id="5_jq0ef"]
 [ext_resource type="PackedScene" uid="uid://c1rbava0y5b7y" path="res://sidebar.tscn" id="6_e72sf"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main Scene" type="Node2D"]
 texture_filter = 4
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -26,14 +26,14 @@ scale = Vector2(2, 2)
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("1_8jth8")
 
-[node name="Control" type="Control" parent="."]
+[node name="Background Holder" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_lock_ = true
 
-[node name="ColorRect2" type="Panel" parent="Control"]
+[node name="Background" type="Panel" parent="Background Holder"]
 z_index = -1
 layout_mode = 0
 offset_left = -11827.0
@@ -74,7 +74,7 @@ script = ExtResource("5_jq0ef")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
-[node name="Node2D" parent="CanvasLayer2" instance=ExtResource("6_e72sf")]
+[node name="Sidebar" parent="CanvasLayer2" instance=ExtResource("6_e72sf")]
 offset_right = 150.0
 
 [connection signal="file_selected" from="CanvasLayer/FileDialog" to="THE UNDERSTANDING TREE/the_start" method="_on_file_dialog_file_selected"]
