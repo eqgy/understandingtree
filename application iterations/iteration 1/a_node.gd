@@ -24,16 +24,26 @@ func globalcount():
 	Globals.nodedictionary[1] = self
 	Globals.nodecount +=1
 	
+func adjust_ids(deleted_id):
+	"""This function is called whenever a node is deleted. It takes the id of the deleted node as 
+	an argument and decrements all of the subqequent id's by 1. 
+	"""
+	var id = deleted_id
+	while (id < Globals.nodecount-1):
+		Globals.nodedictionary[id] = Globals.nodedictionary[id+1]
+	Globals.nodedictionary.erase(id+1)
+	Globals.nodecount -=1
+		
 
 func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
-		problem_leaf.visible = true
+		problem_leaf.visible = false
 	else: 
 		problem_leaf.visible = true
 	if s == "":
-		solution_leaf.visible = true
+		solution_leaf.visible = false
 	else:
 		solution_leaf.visible = true
 
@@ -115,7 +125,10 @@ func check_collisions():
 				#check for a divergent node
 				var collisions = c.get_overlapping_areas()
 				var parent = c.get_parent()
+				var position = collisions[0].position.y
 				#Only adjust if it is a divergent branch or an expansion branch. Currently these are the only adjustment capabilities implemented
+				"""if (parent.type == 4 || parent.type == 3):
+					if parent.position.y """
 				if parent.type == 2 || parent.type == 4:
 					adjust = "yes"
 				elif parent.type == 1 || parent.type ==3:
@@ -431,6 +444,7 @@ func _on_solution_delete_pressed():
 	if $problem.visible == false:
 		for child in $solution.get_children(): #if the problem isn't visible, delete the entirety of the node
 			child.queue_free()
+		adjust_ids(id) #ensure that the id's of the subsequent nodes are adjusted
 		queue_free()
 	
 
@@ -495,29 +509,32 @@ func _on_problem_delete_pressed() -> void:
 	if $solution.visible == false: #If the solution isn't visible, delete the node's other children
 		for child in $problem.get_children():
 			child.queue_free()
+		adjust_ids(id) #ensure that the id's of the subsequent nodes are adjusted
 		queue_free()
 
 func export()-> String:
-	installationdata = "|"
-	if id > 1:
-		if (type >= 3):
-			installationdata += str(get_parent().id)
+	if (visible):
+		installationdata = "|"
+		if id > 1:
+			if (type >= 3):
+				installationdata += str(get_parent().id)
+			else:
+				installationdata += str(get_parent().get_parent().id)
 		else:
-			installationdata += str(get_parent().get_parent().id)
-	else:
-		installationdata += str(0)
-	var i = str(id)
-	var t = str(type)
-	installationdata += " " + i + " " + t
-	var data = installationdata+ "|" + $solution.text + "|" + $problem.text + "\n"
-	
-	for c in problem_leaf.get_children():
-		if "too" in c:
-			data = data + c.export()
-	for c in solution_leaf.get_children():
-		if "too" in c:
-			data = data + c.export()
-	for c in get_children():
-		if "too" in c:
-			data = data + c.export()
-	return data
+			installationdata += str(0)
+		var i = str(id)
+		var t = str(type)
+		installationdata += " " + i + " " + t
+		var data = installationdata+ "|" + $solution.text + "|" + $problem.text + "\n"
+		
+		for c in problem_leaf.get_children():
+			if "too" in c:
+				data = data + c.export()
+		for c in solution_leaf.get_children():
+			if "too" in c:
+				data = data + c.export()
+		for c in get_children():
+			if "too" in c:
+				data = data + c.export()
+		return data
+	return ""

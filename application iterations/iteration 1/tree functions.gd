@@ -39,8 +39,8 @@ func _on_export_pressed():
 			data = child.export()
 			stop = true
 			break;
-	save_to_file(data)
-	pass # Replace with function body.
+	if data != "":
+		save_to_file(data)
 
 
 func _on_import_pressed():
