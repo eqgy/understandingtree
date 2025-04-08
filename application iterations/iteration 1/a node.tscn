@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=12 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 [ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
+[ext_resource type="PackedScene" uid="uid://cqy0v20iux2nn" path="res://vote.tscn" id="6_pnrlj"]
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -105,6 +106,24 @@ offset_bottom = -89.0
 text = "Delete"
 script = ExtResource("5_iskqk")
 
+[node name="Vote" type="Button" parent="solution"]
+visible = false
+layout_mode = 0
+offset_left = 21.0
+offset_top = -159.0
+offset_right = 202.0
+offset_bottom = -119.0
+text = "Vote"
+script = ExtResource("5_iskqk")
+
+[node name="Slider" parent="solution" instance=ExtResource("6_pnrlj")]
+visible = false
+layout_mode = 0
+offset_left = -26.0
+offset_top = -269.0
+offset_right = 76.0
+offset_bottom = -169.0
+
 [node name="LineEdit" type="LineEdit" parent="solution"]
 visible = false
 layout_mode = 0
@@ -193,6 +212,25 @@ text = "Delete
 "
 script = ExtResource("5_iskqk")
 
+[node name="Vote" type="Button" parent="problem"]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 177.0
+offset_right = 199.0
+offset_bottom = 217.0
+text = "Vote
+"
+script = ExtResource("5_iskqk")
+
+[node name="Slider" parent="problem" instance=ExtResource("6_pnrlj")]
+visible = false
+layout_mode = 0
+offset_left = -29.0
+offset_top = 227.0
+offset_right = 73.0
+offset_bottom = 327.0
+
 [node name="LineEdit" type="LineEdit" parent="problem"]
 visible = false
 layout_mode = 0
@@ -230,17 +268,21 @@ metadata/_edit_use_anchors_ = true
 [connection signal="toggled" from="solution" to="solution/Divergent Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="solution" to="solution/Counterargument" method="_on_button_toggled"]
 [connection signal="toggled" from="solution" to="solution/Delete" method="_on_solution_toggled"]
+[connection signal="toggled" from="solution" to="solution/Vote" method="_on_solution_toggled"]
 [connection signal="pressed" from="solution/Expand Idea" to="." method="solution_expand"]
 [connection signal="pressed" from="solution/Divergent Idea" to="." method="solution_diverge"]
 [connection signal="pressed" from="solution/Counterargument" to="." method="solution_counterarg"]
 [connection signal="toggled" from="solution/Counterargument" to="." method="solution_counterarg"]
 [connection signal="pressed" from="solution/Delete" to="." method="_on_solution_delete_pressed"]
+[connection signal="pressed" from="solution/Vote" to="." method="_on_voteS_pressed"]
 [connection signal="toggled" from="problem" to="problem" method="_on_toggled"]
 [connection signal="toggled" from="problem" to="problem/Expand Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Divergent Idea" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Counterargument" method="_on_button_toggled"]
 [connection signal="toggled" from="problem" to="problem/Delete" method="_on_problem_toggled"]
+[connection signal="toggled" from="problem" to="problem/Vote" method="_on_problem_toggled"]
 [connection signal="pressed" from="problem/Expand Idea" to="." method="problem_expand"]
 [connection signal="pressed" from="problem/Divergent Idea" to="." method="problem_diverge"]
 [connection signal="pressed" from="problem/Counterargument" to="." method="problem_counterarg"]
 [connection signal="pressed" from="problem/Delete" to="." method="_on_problem_delete_pressed"]
+[connection signal="pressed" from="problem/Vote" to="." method="_on_voteP_pressed"]

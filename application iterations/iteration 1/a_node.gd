@@ -39,11 +39,11 @@ func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
-		problem_leaf.visible = true
+		problem_leaf.visible = false
 	else: 
 		problem_leaf.visible = true
 	if s == "":
-		solution_leaf.visible = true
+		solution_leaf.visible = false
 	else:
 		solution_leaf.visible = true
 
@@ -242,7 +242,7 @@ func problem_counterarg():
 			child.solution_leaf.visible = true
 			child.problem_leaf.visible = false
 			return child
-	return self
+	return null
 
 func solution_counterarg():
 	"""solution_counterarg() is called whenever the "counter" button on a solution leaf is pressed. If
@@ -275,7 +275,7 @@ func solution_counterarg():
 			child.solution_leaf.visible = false
 			child.problem_leaf.visible = true
 			return child
-	return self
+	return null
 
 func problem_diverge():
 	"""problem_diverge() is called whenever the "diverge" button on a problem leaf is pressed. It
@@ -547,3 +547,14 @@ func export()-> String:
 				data = data + c.export()
 		return data
 	return ""
+
+
+#Spawns voting slider
+
+func _on_voteS_pressed() -> void:
+	var slider = $solution/Slider
+	slider.visible = !slider.visible
+
+func _on_voteP_pressed() -> void:
+	var slider = $problem/Slider
+	slider.visible = !slider.visible
