@@ -53,13 +53,13 @@ func _ready():
 	Globals.nodedictionary[id] = self
 	Globals.nodecount +=1
 
-func adjust_diverge(parent, adjust):
+func adjust_diverge(parent, adjust, collision_body):
 	"""adjust_diverge changes the length of diverging branches to avoid collisions. It takes two arguments:
 	parent and adjust. Parent is the divergnet node and adjust is a string indicating whether the divergent
 	branch should move up or move down.
 	"""
 	var multiple
-	if adjust == "yes": #Branch moves down
+	if adjust == "down": #Branch moves down
 		multiple = 1
 	else: #branch moves up
 		multiple = -1
@@ -127,12 +127,21 @@ func check_collisions():
 				var parent = c.get_parent()
 				var position = collisions[0].position.y
 				#Only adjust if it is a divergent branch or an expansion branch. Currently these are the only adjustment capabilities implemented
-				"""if (parent.type == 4 || parent.type == 3):
-					if parent.position.y """
-				if parent.type == 2 || parent.type == 4:
-					adjust = "yes"
-				elif parent.type == 1 || parent.type ==3:
-					adjust = "no"
+				#Check if the object it collided with is above or below it
+				if (parent.type == 4 || parent.type == 3):
+					if parent.position.y < position:
+						adjust = "down"
+					elif parent.position.y > position:
+						adjust = "up"
+					else:
+						if parent.type == 3:
+							adjust = "down"
+						else:
+							adjust = "up"
+				elif parent.type == 2 :
+					adjust = "down"
+				elif parent.type == 1:
+					adjust = "up"
 				if adjust == "invalid":
 					return;
 				#Adjustments occur by changing the size of divergent brnaches. Check for the most recent divergent branch
@@ -140,7 +149,7 @@ func check_collisions():
 				if diverge == null:
 					return
 				else: #If there is a divergent branch, adjust it
-					adjust_diverge(diverge, adjust)
+					adjust_diverge(diverge, adjust, c)
 				
 func add_collision(posx, posy):
 	"""add_collision is used to create new collision boxes around branch lines. It takes two arguments:
@@ -274,7 +283,7 @@ func problem_diverge():
 	of the previous one at a 90 degree angle. 
 	"""
 	var child = load("res://a node.tscn").instantiate()
-	var position_offset = Vector2(0, 400 * (prob_diverges+1)) #Diverge more if there were previous diverges
+	var position_offset = Vector2(0, 400 *(1+prob_diverges)) #Diverge more if there were previous diverges
 	child.position = position_offset
 	child.add_line()
 	add_child(child)
