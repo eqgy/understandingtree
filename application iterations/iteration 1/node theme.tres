@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bosbvfdtv48xf"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bosbvfdtv48xf"]
 
-[ext_resource type="FontFile" uid="uid://d3ftebbowlidb" path="res://Futura Light.ttf" id="1_c3wsk"]
 [ext_resource type="FontFile" uid="uid://pysn54ei55sn" path="res://futura-pt-cufonfonts/FuturaCyrillicBook.ttf" id="2_4y7yl"]
 [ext_resource type="FontFile" uid="uid://c140ss75l0y8h" path="res://futura-pt-cufonfonts/FuturaCyrillicMedium.ttf" id="3_djc6l"]
 
@@ -59,14 +58,15 @@ corner_radius_bottom_left = 4
 
 [resource]
 default_font = ExtResource("3_djc6l")
-Button/font_sizes/font_size = 16
-Button/fonts/font = ExtResource("1_c3wsk")
+default_font_size = 19
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("3_djc6l")
 Button/styles/hover = SubResource("StyleBoxFlat_olyi6")
 Button/styles/normal = SubResource("StyleBoxFlat_g4ers")
 Button/styles/pressed = SubResource("StyleBoxFlat_xbbqy")
 Label/colors/font_color = Color(0.791999, 0.791999, 0.791999, 1)
 Label/fonts/font = ExtResource("2_4y7yl")
-LineEdit/font_sizes/font_size = 16
+LineEdit/font_sizes/font_size = 20
 LineEdit/fonts/font = ExtResource("3_djc6l")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_xji1o")
 Panel/styles/panel = SubResource("StyleBoxFlat_b1ny6")
