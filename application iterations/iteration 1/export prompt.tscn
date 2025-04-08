@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://neem1u8tbw7y"]
 
-[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_2fger"]
+[ext_resource type="Theme" uid="uid://bs0cajhbjb6g7" path="res://problem_theme.tres" id="1_5qf17"]
 
 [node name="ExportPrompt" type="Node2D"]
 
@@ -17,7 +17,7 @@ offset_right = 210.5
 offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_2fger")
+theme = ExtResource("1_5qf17")
 
 [node name="LineEdit" type="LineEdit" parent="ColorRect"]
 layout_mode = 1
@@ -32,7 +32,7 @@ offset_right = 152.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_2fger")
+theme = ExtResource("1_5qf17")
 placeholder_text = "name of file"
 alignment = 1
 
@@ -49,7 +49,7 @@ offset_right = 98.0
 offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_2fger")
+theme = ExtResource("1_5qf17")
 theme_override_font_sizes/font_size = 24
 text = "export as?"
 horizontal_alignment = 1
@@ -60,5 +60,5 @@ offset_left = 343.5
 offset_top = 180.0
 offset_right = 407.5
 offset_bottom = 211.0
-theme = ExtResource("1_2fger")
+theme = ExtResource("1_5qf17")
 text = "okay"

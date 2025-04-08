@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1406qdf4gdrf"]
+[gd_scene load_steps=8 format=3 uid="uid://b1406qdf4gdrf"]
 
 [ext_resource type="Script" path="res://camera_2d.gd" id="1_8jth8"]
+[ext_resource type="Theme" uid="uid://bs0cajhbjb6g7" path="res://problem_theme.tres" id="1_n1wf8"]
 [ext_resource type="PackedScene" uid="uid://biijdxa5vbai2" path="res://a node.tscn" id="2_7kbvo"]
 [ext_resource type="Script" path="res://tree functions.gd" id="2_eq62t"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="2_jsh6r"]
@@ -15,7 +16,7 @@ texture_filter = 4
 [node name="FileDialog" type="FileDialog" parent="CanvasLayer"]
 title = "Open a File"
 size = Vector2i(322, 180)
-theme = ExtResource("2_jsh6r")
+theme = ExtResource("1_n1wf8")
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -41,7 +42,7 @@ offset_top = -6338.0
 offset_right = -8012.0
 offset_bottom = -1604.0
 scale = Vector2(6.53643, 2.95543)
-theme = ExtResource("2_jsh6r")
+theme = ExtResource("1_n1wf8")
 metadata/_edit_lock_ = true
 
 [node name="THE UNDERSTANDING TREE" type="Node2D" parent="."]
