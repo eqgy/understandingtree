@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqy0v20iux2nn"]
+[gd_scene load_steps=4 format=3 uid="uid://cqy0v20iux2nn"]
 
 [ext_resource type="Script" path="res://vote.gd" id="1_wj1wp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taq08"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
 [sub_resource type="GDScript" id="GDScript_lll5m"]
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="Slider" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wj1wp")
@@ -15,12 +22,14 @@ layout_mode = 2
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_taq08")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 70
+theme_override_constants/separation = 45
 
 [node name="VSlider1" type="VSlider" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 script = SubResource("GDScript_lll5m")
 
