@@ -53,6 +53,19 @@ func _ready():
 	Globals.nodedictionary[id] = self
 	Globals.nodecount +=1
 
+func recursive_delete_ids(object):
+	#This funciton is used to ensure that the global ids of every node are being adjusted for each deleted object
+	for c in object.get_children():
+		if c.get_class() == "Button":
+			for c2 in c.get_children():
+				if c2.get_class() == "Node2D" || c2.get_class() == "Node2D":
+					recursive_delete_ids(c2)
+					adjust_ids(c2.id)
+		if c.get_class() == "Node2D":
+			recursive_delete_ids(c)
+			adjust_ids(c.id)
+	
+	
 func adjust_diverge(parent, adjust, collision_body):
 	"""adjust_diverge changes the length of diverging branches to avoid collisions. It takes two arguments:
 	parent and adjust. Parent is the divergnet node and adjust is a string indicating whether the divergent
@@ -447,12 +460,15 @@ func _on_solution_delete_pressed():
 		parent.has_counterarg = false;
 	for child in $solution.get_children():
 		if (child.get_class() == "Node2D"): #No matter what delete all of the child nodes off of the node
+			recursive_delete_ids(child)
+			adjust_ids(child.id)
 			child.queue_free()
 	if $solution.visible:
 		$solution.visible = false
 	if $problem.visible == false:
 		for child in $solution.get_children(): #if the problem isn't visible, delete the entirety of the node
 			child.queue_free()
+		recursive_delete_ids(self)
 		adjust_ids(id) #ensure that the id's of the subsequent nodes are adjusted
 		queue_free()
 	
@@ -511,6 +527,8 @@ func _on_problem_delete_pressed() -> void:
 			
 	for child in $problem.get_children(): #Delete all of the node's children
 		if (child.get_class() == "Node2D"): #No matter what delete all of the child nodes off of the node
+			recursive_delete_ids(child)
+			adjust_ids(child.id)
 			child.queue_free()
 
 	if $problem.visible:
@@ -518,6 +536,7 @@ func _on_problem_delete_pressed() -> void:
 	if $solution.visible == false: #If the solution isn't visible, delete the node's other children
 		for child in $problem.get_children():
 			child.queue_free()
+		recursive_delete_ids(self)
 		adjust_ids(id) #ensure that the id's of the subsequent nodes are adjusted
 		queue_free()
 
