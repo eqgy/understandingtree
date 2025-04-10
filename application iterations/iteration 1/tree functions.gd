@@ -123,7 +123,6 @@ func _on_file_dialog_file_selected(path):
 			child.problem_leaf.visible = true
 		elif nodetype == 2:
 			child = par.solution_expand()
-
 			child.solution_leaf.visible = true
 		elif nodetype == 3:
 			child = par.problem_diverge()

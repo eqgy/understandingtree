@@ -447,6 +447,7 @@ func _on_solution_delete_pressed():
 		parent.has_counterarg = false;
 	for child in $solution.get_children():
 		if (child.get_class() == "Node2D"): #No matter what delete all of the child nodes off of the node
+			adjust_ids(child.id)
 			child.queue_free()
 	if $solution.visible:
 		$solution.visible = false
@@ -511,6 +512,7 @@ func _on_problem_delete_pressed() -> void:
 			
 	for child in $problem.get_children(): #Delete all of the node's children
 		if (child.get_class() == "Node2D"): #No matter what delete all of the child nodes off of the node
+			adjust_ids(child.id)
 			child.queue_free()
 
 	if $problem.visible:
