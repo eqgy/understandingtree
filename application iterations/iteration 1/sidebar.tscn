@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1rbava0y5b7y"]
 
 [ext_resource type="Script" path="res://sidebar.gd" id="1_bebx6"]
-[ext_resource type="Theme" uid="uid://bs0cajhbjb6g7" path="res://problem_theme.tres" id="2_j0nxx"]
+[ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_unxxk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bj12d"]
 
@@ -57,14 +57,14 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_j0nxx")
+theme = ExtResource("1_unxxk")
 text = "Understanding
 Tree"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_j0nxx")
+theme = ExtResource("1_unxxk")
 theme_override_font_sizes/font_size = 13
 text = "Description:
 "
@@ -91,7 +91,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-theme = ExtResource("2_j0nxx")
+theme = ExtResource("1_unxxk")
 theme_override_font_sizes/font_size = 16
 text = "ai suggestions"
 

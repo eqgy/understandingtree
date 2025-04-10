@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=15 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
 [ext_resource type="Script" path="res://leaf.gd" id="2_g56ri"]
-[ext_resource type="Theme" uid="uid://cds065iq12qql" path="res://solution_theme.tres" id="2_kicbh"]
+[ext_resource type="Script" path="res://label.gd" id="4_jeh8l"]
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
-[ext_resource type="Theme" uid="uid://bs0cajhbjb6g7" path="res://problem_theme.tres" id="4_xkqwe"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 [ext_resource type="Script" path="res://line_edit_details.gd" id="5_mb0gu"]
 [ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
@@ -50,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("2_kicbh")
+theme = ExtResource("1_ssop8")
 toggle_mode = true
 script = ExtResource("2_g56ri")
 metadata/_edit_use_anchors_ = true
@@ -107,7 +106,6 @@ offset_left = 21.0
 offset_top = -129.0
 offset_right = 202.0
 offset_bottom = -89.0
-theme = ExtResource("1_ssop8")
 text = "Delete"
 script = ExtResource("5_iskqk")
 
@@ -118,9 +116,16 @@ offset_left = 21.0
 offset_top = -159.0
 offset_right = 202.0
 offset_bottom = -119.0
-theme = ExtResource("1_ssop8")
 text = "Vote"
 script = ExtResource("5_iskqk")
+
+[node name="Slider" parent="solution" instance=ExtResource("6_pnrlj")]
+visible = false
+layout_mode = 0
+offset_left = -84.0
+offset_top = -270.0
+offset_right = 18.0
+offset_bottom = -170.0
 
 [node name="LineEdit" type="LineEdit" parent="solution"]
 visible = false
@@ -135,13 +140,44 @@ clear_button_enabled = true
 drag_and_drop_selection_enabled = false
 script = ExtResource("6_3ocxf")
 
-[node name="Slider" parent="solution" instance=ExtResource("6_pnrlj")]
+[node name="Details" type="Button" parent="solution"]
 visible = false
 layout_mode = 0
-offset_left = -129.0
-offset_top = -29.0
-offset_right = -27.0
-offset_bottom = 71.0
+offset_left = 21.0
+offset_top = -197.0
+offset_right = 202.0
+offset_bottom = -152.0
+text = "Details"
+script = ExtResource("8_6qqdu")
+
+[node name="Label" type="Label" parent="solution"]
+visible = false
+z_index = 4
+layout_mode = 0
+offset_left = -201.0
+offset_top = -208.0
+offset_right = -37.0
+offset_bottom = -2.0
+script = ExtResource("4_jeh8l")
+
+[node name="LineEdit_details" type="LineEdit" parent="solution/Label"]
+visible = false
+z_index = 4
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 164.0
+offset_bottom = 204.0
+placeholder_text = "(unwritten)"
+script = ExtResource("5_mb0gu")
+
+[node name="ColorRect" type="ColorRect" parent="solution/Label"]
+z_index = 3
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 162.0
+offset_bottom = 203.0
+color = Color(0.212305, 0.212305, 0.212305, 1)
 
 [node name="problem" type="Button" parent="."]
 z_index = 2
@@ -159,7 +195,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("4_xkqwe")
+theme = ExtResource("1_ssop8")
 toggle_mode = true
 script = ExtResource("2_g56ri")
 metadata/_edit_use_anchors_ = true
@@ -240,7 +276,6 @@ offset_left = 18.0
 offset_top = 147.0
 offset_right = 199.0
 offset_bottom = 187.0
-theme = ExtResource("1_ssop8")
 text = "Delete
 "
 script = ExtResource("5_iskqk")
@@ -252,10 +287,17 @@ offset_left = 18.0
 offset_top = 177.0
 offset_right = 199.0
 offset_bottom = 217.0
-theme = ExtResource("1_ssop8")
 text = "Vote
 "
 script = ExtResource("5_iskqk")
+
+[node name="Slider" parent="problem" instance=ExtResource("6_pnrlj")]
+visible = false
+layout_mode = 0
+offset_left = -92.0
+offset_top = 244.0
+offset_right = 10.0
+offset_bottom = 344.0
 
 [node name="LineEdit" type="LineEdit" parent="problem"]
 visible = false
@@ -270,13 +312,15 @@ clear_button_enabled = true
 drag_and_drop_selection_enabled = false
 script = ExtResource("6_3ocxf")
 
-[node name="Slider" parent="problem" instance=ExtResource("6_pnrlj")]
+[node name="Details" type="Button" parent="problem"]
 visible = false
-layout_mode = 0
-offset_left = -130.0
-offset_top = -23.0
-offset_right = -28.0
-offset_bottom = 77.0
+offset_left = 18.0
+offset_top = 213.0
+offset_right = 199.0
+offset_bottom = 258.0
+text = "Details
+"
+script = ExtResource("8_6qqdu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
