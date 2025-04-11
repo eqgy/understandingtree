@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://biijdxa5vbai2"]
+[gd_scene load_steps=14 format=3 uid="uid://biijdxa5vbai2"]
 
 [ext_resource type="Script" path="res://a_node.gd" id="1_lkhld"]
 [ext_resource type="Theme" uid="uid://bosbvfdtv48xf" path="res://node theme.tres" id="1_ssop8"]
 [ext_resource type="Script" path="res://leaf.gd" id="2_g56ri"]
+[ext_resource type="Theme" uid="uid://b81ph5ou687p8" path="res://solution_theme.tres" id="2_oyxdw"]
 [ext_resource type="Script" path="res://add_branch_button.gd" id="4_pq1f4"]
 [ext_resource type="Script" path="res://delete.gd" id="5_iskqk"]
 [ext_resource type="Script" path="res://line_edit.gd" id="6_3ocxf"]
 [ext_resource type="PackedScene" uid="uid://cqy0v20iux2nn" path="res://vote.tscn" id="6_pnrlj"]
+[ext_resource type="Theme" uid="uid://brufak4s4wm3g" path="res://problem_theme.tres" id="9_xpo21"]
 
 [sub_resource type="Curve" id="Curve_ottr0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -46,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_ssop8")
+theme = ExtResource("2_oyxdw")
 toggle_mode = true
 script = ExtResource("2_g56ri")
 metadata/_edit_use_anchors_ = true
@@ -103,6 +105,7 @@ offset_left = 21.0
 offset_top = -129.0
 offset_right = 202.0
 offset_bottom = -89.0
+theme = ExtResource("1_ssop8")
 text = "Delete"
 script = ExtResource("5_iskqk")
 
@@ -113,16 +116,17 @@ offset_left = 21.0
 offset_top = -159.0
 offset_right = 202.0
 offset_bottom = -119.0
+theme = ExtResource("1_ssop8")
 text = "Vote"
 script = ExtResource("5_iskqk")
 
 [node name="Slider" parent="solution" instance=ExtResource("6_pnrlj")]
 visible = false
 layout_mode = 0
-offset_left = -26.0
-offset_top = -269.0
-offset_right = 76.0
-offset_bottom = -169.0
+offset_left = -130.0
+offset_top = -23.0
+offset_right = -28.0
+offset_bottom = 77.0
 
 [node name="LineEdit" type="LineEdit" parent="solution"]
 visible = false
@@ -153,7 +157,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_ssop8")
+theme = ExtResource("9_xpo21")
 toggle_mode = true
 script = ExtResource("2_g56ri")
 metadata/_edit_use_anchors_ = true
@@ -208,6 +212,7 @@ offset_left = 18.0
 offset_top = 147.0
 offset_right = 199.0
 offset_bottom = 187.0
+theme = ExtResource("1_ssop8")
 text = "Delete
 "
 script = ExtResource("5_iskqk")
@@ -219,6 +224,7 @@ offset_left = 18.0
 offset_top = 177.0
 offset_right = 199.0
 offset_bottom = 217.0
+theme = ExtResource("1_ssop8")
 text = "Vote
 "
 script = ExtResource("5_iskqk")
@@ -226,10 +232,10 @@ script = ExtResource("5_iskqk")
 [node name="Slider" parent="problem" instance=ExtResource("6_pnrlj")]
 visible = false
 layout_mode = 0
-offset_left = -29.0
-offset_top = 227.0
-offset_right = 73.0
-offset_bottom = 327.0
+offset_left = -130.0
+offset_top = -19.0
+offset_right = -28.0
+offset_bottom = 81.0
 
 [node name="LineEdit" type="LineEdit" parent="problem"]
 visible = false

@@ -568,12 +568,12 @@ func export()-> String:
 	return ""
 
 
-#Spawns voting slider
-
+#Spawns voting slider for solution node
 func _on_voteS_pressed() -> void:
 	var slider = $solution/Slider
 	slider.visible = !slider.visible
 
+#Spawns voting slider for problem node
 func _on_voteP_pressed() -> void:
 	var slider = $problem/Slider
 	slider.visible = !slider.visible
