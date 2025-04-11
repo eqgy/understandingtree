@@ -1,14 +1,17 @@
 extends PanelContainer
 
+#Variable menu represents text while panel is the background
 @onready var menu = $MarginContainer/HBoxContainer/VBoxContainer
 @onready var panel = $MarginContainer/Panel
 signal airun
 
 func _ready():
+	#Visbile by default
 	menu.visible = true
 	panel.visible = true	
 
 func _on_button_pressed():
+	#Sets visibility to opposite of current state
 	var wasClosed = menu.visible == false
 	panel.visible = wasClosed
 	menu.visible = wasClosed
