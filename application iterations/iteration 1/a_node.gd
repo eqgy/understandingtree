@@ -39,11 +39,11 @@ func import_sequence(s,p):
 	problem_leaf.text = p
 	solution_leaf.text = s
 	if p == "":
-		problem_leaf.visible = false
+		problem_leaf.visible = true
 	else: 
 		problem_leaf.visible = true
 	if s == "":
-		solution_leaf.visible = false
+		solution_leaf.visible = true
 	else:
 		solution_leaf.visible = true
 
