@@ -541,7 +541,9 @@ func _on_problem_delete_pressed() -> void:
 		queue_free()
 
 func export()-> String:
+	#function run on every node when export is pressed
 	if (visible):
+		#grabs all relevent data
 		installationdata = "|"
 		if id > 1:
 			if (type >= 3):
@@ -555,6 +557,7 @@ func export()-> String:
 		installationdata += " " + i + " " + t
 		var data = installationdata+ "|" + $solution.text + "|" + $problem.text + "\n"
 		
+		#runs on all valid children.
 		for c in problem_leaf.get_children():
 			if "too" in c:
 				data = data + c.export()
