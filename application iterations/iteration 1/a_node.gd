@@ -29,8 +29,13 @@ func adjust_ids(deleted_id):
 	an argument and decrements all of the subqequent id's by 1. 
 	"""
 	var id = deleted_id
+	if id == Globals.nodecount -1:
+		Globals.nodedictionary.erase(id)
+		Globals.nodecount -=1
+		return
 	while (id < Globals.nodecount-1):
 		Globals.nodedictionary[id] = Globals.nodedictionary[id+1]
+		id +=1
 	Globals.nodedictionary.erase(id+1)
 	Globals.nodecount -=1
 		
@@ -61,7 +66,7 @@ func recursive_delete_ids(object):
 				if c2.get_class() == "Node2D" || c2.get_class() == "Node2D":
 					recursive_delete_ids(c2)
 					adjust_ids(c2.id)
-		if c.get_class() == "Node2D":
+		if  c.get_class() == "Node2D":
 			recursive_delete_ids(c)
 			adjust_ids(c.id)
 	
